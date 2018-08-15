@@ -6,6 +6,25 @@ h1 {
     text-align: center;
 }
 
+button {
+    background-color: blue;
+    color: white;
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 2px 5px 2px #999;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+    
+button:ACTIVE {
+    box-shadow: 1px 3px 2px #999;
+    transform: translateY(2px);
+}
+
 #header #title {
     margin: auto;
     float: center;
@@ -20,12 +39,36 @@ h1 {
     text-align: center;
 }
 
+#moneyz button {
+    background-color: blue;
+    color: white;
+    padding: 15px 25px;
+    font-size: 36px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 2px 5px 2px #999;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+    
+#moneyz button:ACTIVE {
+    box-shadow: 1px 3px 2px #999;
+    transform: translateY(2px);
+}
+
+#moneyz p {
+    margin-top: 15px;
+    font-size: 24px;
+}
+
 #item {
     width: 45%;
     float: left;
     text-align: center;
     margin: 2.5%;
-    background-color: magenta;
+    background-color: rgb(200, 20, 20);
 }
 
 #footer {
@@ -38,7 +81,26 @@ h1 {
 }
 
 #footer #muteButton {
+    background-color: red;
+    color: white;
     padding: 10px 20px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 2px 5px 2px #999;
+}
+
+#footer #muteButton:ACTIVE {
+    box-shadow: 1px 3px 2px #999;
+    transform: translateY(2px);
+}
+
+#footer #ready {
+    background-color: green;
+    font-size: 18px;
+    margin-top: 15px;
 }
 
 #footer h2 {

@@ -49,14 +49,14 @@
                 <source src="audio/bgmusic.mp3" hidden="true" autostart="true">
             </audio>
             <div id="moneyz">
-                <p>Moneyz: <span id="gold">100</span></p>
-                <button onclick="earnMoneyz()">Earn Moneyz!</button>
+                <p>Moneyz: <span id="gold">100</span> doots</p>
+                <button onclick="earnMoneyz()">Earn Moneyz!!!!!1</button>
             </div>
 
             <div id="item">
                 <p><strong>Coffee</strong></p>
                 <p>Amount: <span id="coffee">0</span></p>
-                <p>Cost: <span id="coffee-cost">10</span></p>
+                <p>Cost: <span id="coffee-cost">10</span> doots</p>
                 <button onclick="buy('coffee')">Buy</button>
             
             </div>
@@ -64,28 +64,28 @@
             <div id="item">
                 <p><strong>Pizza</strong></p>
                 <p>Amount: <span id="pizza">0</span></p>
-                <p>Cost: <span id="pizza-cost">35</span></p>
+                <p>Cost: <span id="pizza-cost">35 doots</span></p>
                 <button onclick="buy('pizza')">Buy</button>
             </div>
 
             <div id="item">
                 <p><strong>Tea</strong></p>
                 <p>Amount: <span id="tea">0</span></p>
-                <p>Cost: <span id="tea-cost">8</span></p>
+                <p>Cost: <span id="tea-cost">8 doots</span></p>
                 <button onclick="buy('tea')">Buy</button>
             </div>
 
             <div id="item">
                 <p><strong>Burger</strong></p>
                 <p>Amount: <span id="burger">0</span></p>
-                <p>Cost: <span id="burger-cost">30</span></p>
+                <p>Cost: <span id="burger-cost">30 doots</span></p>
                 <button onclick="buy('burger')">Buy</button>
             </div>
         </div>
 
         <div id="footer">
             <button id="muteButton" onclick="toggleMute()">Mute Music</button>
-            <p>Version: <span id="version">v0.0.1</span></p>
+            <p>Version: <span id="version">v0.0.1a</span></p>
         <!-- the button onClick sends a quitAndInstall message to the electron main process -->
         <button id="ready" onClick="ipcRenderer.send('quitAndInstall')">No Updates Ready</button>
         </div>
