@@ -7,12 +7,16 @@
                 var gold = document.getElementById("gold");
                 var itemCount = document.getElementById(item);
                 var itemPrice = document.getElementById(item+"-cost");
+                var happyz = document.getElementById("happyzValue");
+                var itemHappyz = document.getElementById(item+"-happyz");
 
 
                 //alert(gold.innerHTML + " " + itemCount.innerHTML + " " + itemPrice.innerHTML);
                 if(parseInt(gold.innerHTML) - parseInt(itemPrice.innerHTML) >= 0) {
                     itemCount.innerHTML = parseInt(itemCount.innerHTML) + 1;
+                    happyz.innerHTML = parseInt(happyz.innerHTML) + parseInt(itemHappyz.innerHTML);
                     gold.innerHTML = parseInt(gold.innerHTML) - parseInt(itemPrice.innerHTML);
+                    play(item);
                 } else {
                     alert("You need more Moneyz!");
                 }
@@ -26,10 +30,10 @@
             }
 
 
-            function play(sound){
-                var sound = document.getElementById(sound+"-sound");
-                sound.play();
-                sound.currentTime = 0;
+            function play(item){
+                var item = document.getElementById(item+"-sound");
+                item.play();
+                item.currentTime = 0;
             }
 
             function toggleMute() {
@@ -57,43 +61,65 @@
             </audio>
             <div id="moneyz">
                 <p>Moneyz: <span id="gold">100</span> doots</p>
+            </div>
+
+            <div id="happyz">
+                <p>Happyz: <span id="happyzValue">10</span> smilez</p>
+            </div>
+
+            <div id="earn">
                 <button onclick="earnMoneyz();play('moneyz');">Earn Moneyz!!!!!1</button>
                 <audio id="moneyz-sound" src="audio/volume.mp3"></audio>
             </div>
 
             <div id="item">
-                <p><strong>Coffee</strong></p>
+                <h2>Coffee</h2>
                 <p>Amount: <span id="coffee">0</span></p>
                 <p>Cost: <span id="coffee-cost">10</span> doots</p>
-                <button onclick="buy('coffee');play('coffee')">Buy</button>
+                <p>Happyz: <span id="coffee-happyz">7</span></p>
+                <img src="images/coffee.png" alt="coffee"/>
+                <br>
+                <button onclick="buy('coffee');">Buy</button>
                 <audio id="coffee-sound" src="audio/slurp.wav"></audio>
             </div>
 
             <div id="item">
-                <p><strong>Pizza</strong></p>
+                <h2>Pizza</h2>
                 <p>Amount: <span id="pizza">0</span></p>
-                <p>Cost: <span id="pizza-cost">35 doots</span></p>
+                <p>Cost: <span id="pizza-cost">35</span> doots</p>
+                <p>Happyz: <span id="pizza-happyz">21</span></p>
+                <img src="images/pizza.png" alt="pizza"/>
+                <br>
                 <button onclick="buy('pizza')">Buy</button>
+                <audio id="pizza-sound" src="audio/pizza.mp3"></audio>
             </div>
 
             <div id="item">
-                <p><strong>Tea</strong></p>
+                <h2>Tea</h2>
                 <p>Amount: <span id="tea">0</span></p>
-                <p>Cost: <span id="tea-cost">8 doots</span></p>
-                <button onclick="buy('tea')">Buy</button>
+                <p>Cost: <span id="tea-cost">8</span> doots</p>
+                <p>Happyz: <span id="tea-happyz">6</span></p>
+                <img src="images/tea.png" alt="tea"/>
+                <br>
+                <button onclick="buy('tea');">Buy</button>
+                <audio id="tea-sound" src="audio/slurp.wav"></audio>
             </div>
 
             <div id="item">
-                <p><strong>Burger</strong></p>
+                <h2>Burger</h2>
                 <p>Amount: <span id="burger">0</span></p>
-                <p>Cost: <span id="burger-cost">30 doots</span></p>
+                <p>Cost: <span id="burger-cost">30</span> doots</p>
+                <p>Happyz: <span id="burger-happyz">14</span></p>
+                <img src="images/burger.png" alt="burger"/>
+                <br>
                 <button onclick="buy('burger')">Buy</button>
+                <audio id="burger-sound" src="audio/chezburgers.mp3"></audio>
             </div>
         </div>
 
         <div id="footer">
             <button id="muteButton" onclick="toggleMute()">Mute Music</button>
-            <p>Version: <span id="version">v0.0.1b</span></p>
+            <p>Version: <span id="version">v0.0.3a</span></p>
         </div>
     </body>
 </html>
