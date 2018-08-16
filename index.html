@@ -25,6 +25,13 @@
                 gold.innerHTML = parseInt(gold.innerHTML) + parseInt(randomNumber);
             }
 
+
+            function play(sound){
+                var sound = document.getElementById(sound+"-sound");
+                sound.play();
+                sound.currentTime = 0;
+            }
+
             function toggleMute() {
                 var music = document.getElementById('backgroundMusic');
 
@@ -50,15 +57,16 @@
             </audio>
             <div id="moneyz">
                 <p>Moneyz: <span id="gold">100</span> doots</p>
-                <button onclick="earnMoneyz()">Earn Moneyz!!!!!1</button>
+                <button onclick="earnMoneyz();play('moneyz');">Earn Moneyz!!!!!1</button>
+                <audio id="moneyz-sound" src="audio/volume.mp3"></audio>
             </div>
 
             <div id="item">
                 <p><strong>Coffee</strong></p>
                 <p>Amount: <span id="coffee">0</span></p>
                 <p>Cost: <span id="coffee-cost">10</span> doots</p>
-                <button onclick="buy('coffee')">Buy</button>
-            
+                <button onclick="buy('coffee');play('coffee')">Buy</button>
+                <audio id="coffee-sound" src="audio/slurp.wav"></audio>
             </div>
 
             <div id="item">
@@ -85,19 +93,7 @@
 
         <div id="footer">
             <button id="muteButton" onclick="toggleMute()">Mute Music</button>
-            <p>Version: <span id="version">v0.0.1a</span></p>
-        <!-- the button onClick sends a quitAndInstall message to the electron main process -->
-        <button id="ready" onClick="ipcRenderer.send('quitAndInstall')">No Updates Ready</button>
+            <p>Version: <span id="version">v0.0.1b</span></p>
         </div>
-        <script>
-            const ipcRenderer = require('electron').ipcRenderer;
-            // wait for an updateReady message
-            ipcRenderer.on('updateReady', function(event, text) {
-                // changes the text of the button
-                var container = document.getElementById('ready');
-                container.innerHTML = "Update Ready!";
-                alert('An update is ready.');
-            })
-        </script>
     </body>
 </html>

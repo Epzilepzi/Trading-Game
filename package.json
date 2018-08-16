@@ -1,13 +1,13 @@
 {
   "name": "trading-game-v1",
-  "version": "0.0.1a",
+  "version": "0.0.2",
   "description": "Yeetmeister Trading Game v1",
   "main": "main.js",
   "repository": "https://github.com/Epzilepzi/Trading-Game",
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder",
-    "build": "build --mac --win",
+    "build": "build",
     "ship": "build --mac --win -p always"
   },
   "author": "Yeetmeister",
