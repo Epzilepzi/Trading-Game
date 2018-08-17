@@ -1,5 +1,10 @@
-html {
+@-ms-viewport{
+    width: device-width;
+}
+
+html, body {
     font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
 }
 
 h1 {
@@ -91,7 +96,7 @@ button:ACTIVE {
 }
 
 #item img {
-    width: 40%;
+    max-width: 40%;
 }
 
 #footer {

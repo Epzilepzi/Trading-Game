@@ -22,11 +22,46 @@
                 }
             }
 
+             function sell(item){
+                var gold = document.getElementById("gold");
+                var itemCount = document.getElementById(item);
+                var itemPrice = document.getElementById(item+"-cost");
+                var happyz = document.getElementById("happyzValue");
+                var itemHappyz = document.getElementById(item+"-happyz");
+
+
+                //alert(gold.innerHTML + " " + itemCount.innerHTML + " " + itemPrice.innerHTML);
+                if(parseInt(itemCount.innerHTML) > 0) {
+                    itemCount.innerHTML = parseInt(itemCount.innerHTML) - 1;
+                    gold.innerHTML = parseInt(gold.innerHTML) + parseInt(itemPrice.innerHTML);
+                    play(item);
+                } else {
+                    alert("You need more " + item + "!");
+                }
+            }
+
             function earnMoneyz() {
                 var gold = document.getElementById("gold");
-                var randomNumber = Math.floor(Math.random() * 21);
+                var random = Math.floor(Math.random() * 16);
+                var randomNumber = random - 5;
+                var array = ["pizza", "coffee", "tea", "burger"];
+                
+                if (parseInt(gold.innerHTML) === 500) {
+                    alert('You cannot earn any more moneyz from working!!! Start trading!!!');
+                } else if (parseInt(gold.innerHTML) + parseInt(randomNumber) <= 500) {
+                    if (parseInt(gold.innerHTML) + parseInt(randomNumber) >= 0) {
+                    gold.innerHTML = parseInt(gold.innerHTML) + parseInt(randomNumber);
+                    }
+                } else {
+                    gold.innerHTML = parseInt(gold.innerHTML) + (500 - parseInt(gold.innerHTML));
+                }
 
-                gold.innerHTML = parseInt(gold.innerHTML) + parseInt(randomNumber);
+                changePrices(array[0]);
+                changePrices(array[1]);
+                changePrices(array[2]);
+                changePrices(array[3]);
+
+                loseKarma();
             }
 
 
@@ -46,80 +81,129 @@
                     music.currentTime = 0;
                 }
             }
+
+            function changePrices(item) {
+                var itemPrice = document.getElementById(item+"-cost");
+                var itemHappyz = document.getElementById(item+"-happyz");
+                var rand = Math.floor(Math.random() * 11) - 5;
+                var randHappyz = Math.floor(Math.random() * 21) - 10;
+
+                if(parseInt(itemPrice.innerHTML) + rand >= 2 && parseInt(itemPrice.innerHTML) + rand <= 51) {
+                itemPrice.innerHTML = parseInt(itemPrice.innerHTML) + rand;
+                }
+
+                if(parseInt(itemHappyz.innerHTML) + randHappyz >= 5 && parseInt(itemHappyz.innerHTML) + randHappyz <= 150) {
+                itemHappyz.innerHTML = parseInt(itemHappyz.innerHTML) + randHappyz;
+                }
+            }
+
+            function loseKarma() {
+                var karmaValue = document.getElementById("happyzValue");
+                var rand = Math.floor(Math.random() * 6);
+                karmaValue.innerHTML = parseInt(karmaValue.innerHTML) - parseInt(rand);
+            }
+
+            //
+
+            /*
+            function borrow(){
+                var gold = document.getElementById("gold");
+                var loan = document.getElementById("loan");
+
+                gold.innerHTML = parseInt(gold.innerHTML) + 1000;
+                loan.innerHTML = parseInt(loan.innerHTML) + 1000;
+            }
+            
+            function addInterest(){
+                var loan = document.getElementById("loan");
+                var interest = 1.012;
+                var debt = parseInt(loan.innerHTML);
+                
+                debt = Math.floor(debt * interest);
+                loan.innerHTML = debt;
+            }
+            */
         </script>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     </head>
     <body>
-        <div id="header">
-            <div id="title">
-                <h1>Trading Game</h1>
-            </div>
-        </div>
-
-        <div id="game">
-            <audio id="backgroundMusic" autoplay="autoplay" loop>
-                <source src="audio/bgmusic.mp3" hidden="true" autostart="true">
-            </audio>
-            <div id="moneyz">
-                <p>Moneyz: <span id="gold">100</span> doots</p>
+        <div class="body">
+            <div id="header">
+                <div id="title">
+                    <h1>Trading Game</h1>
+                </div>
             </div>
 
-            <div id="happyz">
-                <p>Happyz: <span id="happyzValue">10</span> smilez</p>
+            <div id="game">
+                <audio id="backgroundMusic" autoplay="autoplay" loop>
+                    <source src="audio/bgmusic.mp3" hidden="true" autostart="true">
+                </audio>
+                <div id="moneyz">
+                    <p>Moneyz: <span id="gold">100</span> updoots</p>
+                </div>
+
+                <div id="happyz">
+                    <p>Happyz: <span id="happyzValue">100</span> karma</p>
+                </div>
+
+                <div id="earn">
+                    <button onclick="earnMoneyz();play('moneyz');">Earn Moneyz!!!!!1</button>
+                    <audio id="moneyz-sound" src="audio/volume.mp3"></audio>
+                </div>
+
+                <div id="item">
+                    <h2>Coffee</h2>
+                    <p>Amount: <span id="coffee">0</span></p>
+                    <p>Cost: <span id="coffee-cost">10</span> updoots</p>
+                    <p>Happyz: <span id="coffee-happyz">7</span></p>
+                    <img src="images/coffee.png" alt="coffee"/>
+                    <br>
+                    <button onclick="buy('coffee');">Buy</button>
+                    <button onclick="sell('coffee');">Sell</button>
+                    <audio id="coffee-sound" src="audio/slurp.wav"></audio>
+                </div>
+
+                <div id="item">
+                    <h2>Pizza</h2>
+                    <p>Amount: <span id="pizza">0</span></p>
+                    <p>Cost: <span id="pizza-cost">35</span> updoots</p>
+                    <p>Happyz: <span id="pizza-happyz">21</span></p>
+                    <img src="images/pizza.png" alt="pizza"/>
+                    <br>
+                    <button onclick="buy('pizza')">Buy</button>
+                    <button onclick="sell('pizza');">Sell</button>
+                    <audio id="pizza-sound" src="audio/pizza.mp3"></audio>
+                </div>
+
+                <div id="item">
+                    <h2>Tea</h2>
+                    <p>Amount: <span id="tea">0</span></p>
+                    <p>Cost: <span id="tea-cost">8</span> updoots</p>
+                    <p>Happyz: <span id="tea-happyz">6</span></p>
+                    <img src="images/tea.png" alt="tea"/>
+                    <br>
+                    <button onclick="buy('tea');">Buy</button>
+                    <button onclick="sell('tea');">Sell</button>
+                    <audio id="tea-sound" src="audio/slurp.wav"></audio>
+                </div>
+
+                <div id="item">
+                    <h2>Burger</h2>
+                    <p>Amount: <span id="burger">0</span></p>
+                    <p>Cost: <span id="burger-cost">30</span> updoots</p>
+                    <p>Happyz: <span id="burger-happyz">14</span></p>
+                    <img src="images/burger.png" alt="burger"/>
+                    <br>
+                    <button onclick="buy('burger')">Buy</button>
+                    <button onclick="sell('burger');">Sell</button>
+                    <audio id="burger-sound" src="audio/chezburgers.mp3"></audio>
+                </div>
             </div>
 
-            <div id="earn">
-                <button onclick="earnMoneyz();play('moneyz');">Earn Moneyz!!!!!1</button>
-                <audio id="moneyz-sound" src="audio/volume.mp3"></audio>
+            <div id="footer">
+                <button id="muteButton" onclick="toggleMute()">Mute Music</button>
+                <p>Version: <span id="version">v0.1.0-alpha</span></p>
             </div>
-
-            <div id="item">
-                <h2>Coffee</h2>
-                <p>Amount: <span id="coffee">0</span></p>
-                <p>Cost: <span id="coffee-cost">10</span> doots</p>
-                <p>Happyz: <span id="coffee-happyz">7</span></p>
-                <img src="images/coffee.png" alt="coffee"/>
-                <br>
-                <button onclick="buy('coffee');">Buy</button>
-                <audio id="coffee-sound" src="audio/slurp.wav"></audio>
-            </div>
-
-            <div id="item">
-                <h2>Pizza</h2>
-                <p>Amount: <span id="pizza">0</span></p>
-                <p>Cost: <span id="pizza-cost">35</span> doots</p>
-                <p>Happyz: <span id="pizza-happyz">21</span></p>
-                <img src="images/pizza.png" alt="pizza"/>
-                <br>
-                <button onclick="buy('pizza')">Buy</button>
-                <audio id="pizza-sound" src="audio/pizza.mp3"></audio>
-            </div>
-
-            <div id="item">
-                <h2>Tea</h2>
-                <p>Amount: <span id="tea">0</span></p>
-                <p>Cost: <span id="tea-cost">8</span> doots</p>
-                <p>Happyz: <span id="tea-happyz">6</span></p>
-                <img src="images/tea.png" alt="tea"/>
-                <br>
-                <button onclick="buy('tea');">Buy</button>
-                <audio id="tea-sound" src="audio/slurp.wav"></audio>
-            </div>
-
-            <div id="item">
-                <h2>Burger</h2>
-                <p>Amount: <span id="burger">0</span></p>
-                <p>Cost: <span id="burger-cost">30</span> doots</p>
-                <p>Happyz: <span id="burger-happyz">14</span></p>
-                <img src="images/burger.png" alt="burger"/>
-                <br>
-                <button onclick="buy('burger')">Buy</button>
-                <audio id="burger-sound" src="audio/chezburgers.mp3"></audio>
-            </div>
-        </div>
-
-        <div id="footer">
-            <button id="muteButton" onclick="toggleMute()">Mute Music</button>
-            <p>Version: <span id="version">v0.0.3-alpha</span></p>
         </div>
     </body>
 </html>
