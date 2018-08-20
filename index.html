@@ -127,29 +127,32 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     </head>
     <body>
-        <div class="body">
-            <div id="header">
+        <div id="header">
                 <div id="title">
                     <h1>Trading Game</h1>
                 </div>
+        </div>
+
+        <div id="navbar">
+            <div id="moneyz">
+                <p>Moneyz: <span id="gold">100</span> updoots</p>
             </div>
 
+            <div id="happyz">
+                <p>Happyz: <span id="happyzValue">100</span> karma</p>
+            </div>
+        
+            <div id="earn">
+                <button id="earnButton" onclick="earnMoneyz();play('moneyz');">Earn Moneyz!!!!!1</button>
+                <audio id="moneyz-sound" src="audio/volume.mp3"></audio>
+            </div>
+        </div>
+
+        <div class="content">
             <div id="game">
                 <audio id="backgroundMusic" autoplay="autoplay" loop>
                     <source src="audio/bgmusic.mp3" hidden="true" autostart="true">
                 </audio>
-                <div id="moneyz">
-                    <p>Moneyz: <span id="gold">100</span> updoots</p>
-                </div>
-
-                <div id="happyz">
-                    <p>Happyz: <span id="happyzValue">100</span> karma</p>
-                </div>
-
-                <div id="earn">
-                    <button onclick="earnMoneyz();play('moneyz');">Earn Moneyz!!!!!1</button>
-                    <audio id="moneyz-sound" src="audio/volume.mp3"></audio>
-                </div>
 
                 <div id="item">
                     <h2>Coffee</h2>
@@ -206,4 +209,28 @@
             </div>
         </div>
     </body>
+    <script>
+        // When the user scrolls the page, execute myFunction
+        window.onscroll = function() {myFunction()};
+
+        // Get the navbar
+        var navbar = document.getElementById("navbar");
+
+        // Get the offset position of the navbar
+        var sticky = navbar.offsetTop;
+
+        // Sticky Button
+        var stickyButton = document.getElementById("earnButton");
+
+        // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky");
+                // navbar.classList.remove("notSticky");
+            } else {
+                navbar.classList.remove("sticky");
+                // navbar.classList.add("notSticky");
+            }
+        } 
+    </script>
 </html>
