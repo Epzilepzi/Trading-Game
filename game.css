@@ -6,7 +6,12 @@ html, body {
     font-family: Arial, Helvetica, sans-serif;
     height: 100%;
     width: 100%;
+    bottom: 0px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
     margin: 0px;
+    background-color: navy;
 }
 
 h1 {
@@ -26,6 +31,10 @@ button {
     margin-bottom: 15px;
     margin-top: 15px;
 }
+
+#small {
+    font-size: 18px;
+}
     
 button:ACTIVE {
     box-shadow: 1px 3px 2px #999;
@@ -35,6 +44,11 @@ button:ACTIVE {
 #header #title {
     margin: auto;
     float: center;
+    color: white;
+}
+
+.content {
+    background-color: lime;
 }
 
 #game {
@@ -44,7 +58,6 @@ button:ACTIVE {
 /* Sticky Topbar */
 #navbar {
     overflow: hidden;
-    background-color: #333;
     padding-bottom: 10px;
     width: 100%;
     right: 0px;
@@ -53,6 +66,11 @@ button:ACTIVE {
     margin: 0px;
     padding-right: 0px;
     padding-left: 0px;
+    background-color: navy;
+}
+
+button.small {
+    font-size: 18px;
 }
 
 /* The sticky class is added to the navbar with JS when it reaches its scroll position */
@@ -68,9 +86,12 @@ button:ACTIVE {
   padding: 16px;
 }
 
-/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+/* 
+Add some top padding to the page content to prevent sudden quick movement 
+(as the navigation bar gets a new position at the top of the page (position:fixed and top:0) 
+*/
 .sticky + .content {
-padding-top: 200px;
+padding-top: 197px;
 }
 
 #happyz {
