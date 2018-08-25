@@ -1,6 +1,6 @@
 {
   "name": "trading-game",
-  "version": "0.1.0-alpha2",
+  "version": "0.2.0-alpha1",
   "description": "Yeetmeister Trading Game v1",
   "main": "main.js",
   "repository": "https://github.com/Epzilepzi/Trading-Game",
@@ -13,9 +13,10 @@
   "author": "Yeetmeister",
   "license": "ISC",
   "devDependencies": {
+    "ajv": "^6.5.3",
     "asar": "^0.14.3",
-    "electron": "^2.0.7",
-    "electron-builder": "^20.28.1"
+    "electron": "^2.0.8",
+    "electron-builder": "^20.28.2"
   },
   "build": {
     "productName": "Trading Game",

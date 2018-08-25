@@ -1,0 +1,381 @@
+@-ms-viewport{
+    width: device-width;
+}
+
+html, body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    bottom: 0px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    margin: 0px;
+    background-color: navy;
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    background-color: blue;
+    color: white;
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 2px 5px 2px #999;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+    
+button:ACTIVE {
+    box-shadow: 1px 3px 2px #999;
+    transform: translateY(2px);
+}
+
+/* #header #title {
+    margin: auto;
+    float: center;
+    color: white;
+} */
+
+
+
+/* Sticky Topbar */
+#navbar {
+    overflow: hidden;
+    padding-bottom: 10px;
+    width: 100%;
+    right: 0px;
+    left: 0px;
+    color: #ffffff;
+    margin: 0px;
+    padding-right: 0px;
+    padding-left: 0px;
+    background-color: navy;
+    top: 0;
+    position: fixed;
+}
+
+button.small {
+    font-size: 18px;
+}
+
+/* Redundant Functions */
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/*
+// Page content 
+.content {
+  padding: 16px;
+}
+
+
+// Add some top padding to the page content to prevent sudden quick movement 
+// (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) 
+
+
+.sticky + .content {
+padding-top: 180px;
+}
+*/
+
+/* End Sticky Topbar */
+
+/* Value Bar */
+
+#debt {
+    margin: 0px;
+    text-align: center;
+    width: 33%;
+    float: left;
+    padding: 0px;
+}
+
+#debt p {
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+#happyz {
+    margin: 0px;
+    text-align: center;
+    width: 33%;
+    float: left;
+    padding: 0px;
+}
+
+#happyz p {
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+#moneyz {
+    margin: 0px;
+    text-align: center;
+    width: 34%;
+    float: left;
+}
+
+#moneyz p {
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+/* End Value Bar */
+
+/* Top Button Array */
+
+#earnLeft {
+    float: left;
+    margin: 0;
+    width: 33%;
+    text-align: center;
+}
+
+#earnCenter {
+    float: left;
+    margin: 0;
+    width: 34%;
+    text-align: center;
+}
+
+#earnRight {
+    float: left;
+    margin: 0;
+    width: 33%;
+    text-align: center;
+}
+
+/* #earn button.sticky {
+    background-color: blue;
+    color: white;
+    padding: 15px 25px;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 2px 5px 2px #999;
+    margin-bottom: 15px;
+    margin-top: 15px;
+} */
+    
+#earn button:ACTIVE {
+    box-shadow: 1px 3px 2px #999;
+    transform: translateY(2px);
+}
+
+/* button.navbarButtons {
+    background-color: blue;
+    color: white;
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 2px 5px 2px #999;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+*/
+
+/* End Top Button Array */
+
+/* Game */
+
+#bankPanel {
+    display: none;
+    background-color: red;
+    margin-top: 150px;
+    overflow: auto;
+}
+
+#borrowButton {
+    margin: 0;
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+
+#repayButton {
+    margin: 0;
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+
+#content {
+    background-color: lime;
+    margin-top: 150px;
+    overflow: auto;
+}
+
+#game {
+    display: block;
+}
+
+#item {
+    width: 45%;
+    float: left;
+    text-align: center;
+    margin: 2.5%;
+    background-color: rgb(200, 20, 20);
+}
+
+#item img {
+    max-width: 40%;
+}
+
+/* End Game */
+
+/* Footer */
+
+#footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    float: center;
+    display: table;
+    width: 100%;
+    background-color: navy;
+    margin: 0;
+    bottom: 0;
+}
+
+#footer #muteButton {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 2px 5px 2px #999;
+}
+
+#footer #muteButton:ACTIVE {
+    box-shadow: 1px 3px 2px #999;
+    transform: translateY(2px);
+}
+
+#footer #ready {
+    background-color: green;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+#footer h2 {
+    font-weight: normal;
+}
+
+#footer h3 {
+    font-weight: normal;
+}
+
+#footer h4 {
+    font-weight: normal;
+}
+
+/* End Footer */
+
+@media only screen and (max-width: 725px) {
+    button {
+        font-size: 18px;
+    }
+
+    #footer #muteButton {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 590px) {
+    button {
+        font-size: 18px;
+        padding: 10px 15px;
+    }
+
+    #happyz p {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+    
+
+    #debt p {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    #moneyz p {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    #footer #muteButton {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    button {
+        font-size: 18px;
+        padding: 10px 15px;
+    }
+
+    #happyz p {
+        margin-top: 15px;
+        font-size: 12px;
+    }
+    
+
+    #debt p {
+        margin-top: 15px;
+        font-size: 12px;
+    }
+
+    #moneyz p {
+        margin-top: 15px;
+        font-size: 12px;
+    }
+
+    #footer #muteButton {
+        font-size: 18px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    button {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    #happyz p {
+        margin-top: 15px;
+        font-size: 9px;
+    }
+    
+
+    #debt p {
+        margin-top: 15px;
+        font-size: 9px;
+    }
+
+    #moneyz p {
+        margin-top: 15px;
+        font-size: 9px;
+    }
+
+    #footer #muteButton {
+        font-size: 14px;
+    }
+}

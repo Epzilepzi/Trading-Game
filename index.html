@@ -2,41 +2,60 @@
 <html>
     <head>
         <title>Spree&trade;</title>
-        <link rel=stylesheet type="text/css" href="game.css">
+        <link rel=stylesheet type="text/css" href="css/game.css">
+        <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="js/game.js"></script>
+        <script src="js/audio.js"></script>
+        <script>if (window.module) module = window.module;</script>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     </head>
     <body>
-        <div id="header">
-                <div id="title">
-                    <h1>Spree</h1>
-                </div>
-        </div>
-
         <div id="navbar">
-            <div id="moneyz">
-                <p>Moneyz: <span id="gold">100</span> updoots</p>
-            </div>
+            <div id="valueBar">
+                <div id="debt">
+                    <p id="valueText3">Debt: <span id="debtValue">0</span> updoots</p>
+                </div>
+                <div id="moneyz">
+                    <p id="valueText1">Moneyz: <span id="gold">100</span> updoots</p>
+                </div>
 
-            <div id="happyz">
-                <p>Happyz: <span id="happyzValue">100</span> karma</p>
+                <div id="happyz">
+                    <p id="valueText2">Happyz: <span id="happyzValue">100</span> karma</p>
+                </div>
             </div>
         
             <div id="earn">
-                <button id="earnButton" onclick="earnMoneyz();play('moneyz');">Earn Moneyz!!!!!1</button>
-                <audio id="moneyz-sound" src="audio/volume.mp3"></audio>
+                <div id="earnLeft">
+                    <button id="bank" class="navbarButtons">Visit Bank</button>
+                </div>
+
+                <div id="earnCenter">
+                    <button id="earnButton" class="navbarButtons" onclick="earnMoneyz();play('moneyz');">Earn Moneyz!!!!!1</button>
+                 </div>
+
+                 <div id="earnRight">
+                    <button>Travel</button>
+                 </div>
+                <audio id="moneyz-sound" src="audio/volume.mp3" hidden="true"></audio>
             </div>
         </div>
 
-        <div class="content">
+        <div id="bankPanel">
+            <div id="borrowButton">
+                <button id="muteButton" onclick="borrow()">borrow money</button>
+            </div>
+
+            <div id="repayButton">
+                <button id="muteButton" onclick="repay()">repay debt</button>
+            </div>
+        </div>
+        <div id="content">
             <div id="game">
                 <audio id="backgroundMusic" autoplay="autoplay" loop>
                     <source src="audio/bgmusic.mp3" hidden="true" autostart="true">
                 </audio>
-                <audio id="sellSound">
-                    <source src="audio/sell.mp3" hidden="true">
-                </audio>
+                <audio id="sellSound" src="audio/sell.wav" hidden="true"></audio>
 
                 <div id="item">
                     <h2>Coffee</h2>
@@ -86,13 +105,11 @@
                     <audio id="burger-sound" src="audio/chezburgers.mp3"></audio>
                 </div>
             </div>
-
-            <div id="footer">
-                <button id="muteButton" onclick="toggleMute()">Mute Music</button>
-                <button id="muteButton" onclick="borrow()">test</button>
-                <p>Version: <span id="version">v0.1.0-alpha2</span></p>
-            </div>
         </div>
-        <script src="js/style.js"></script>
+        <div id="footer">
+                <button id="muteButton" onclick="toggleMute()">Mute Music</button>
+                <p style="color:white;">Version: <span id="version">v0.2.0-alpha2</span></p>
+        </div>
+        <!-- Redundant <script src="js/style.js"></script> -->
     </body>
 </html>
