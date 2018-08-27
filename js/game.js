@@ -137,30 +137,79 @@ $(document).ready(
     }
 )
 
-/* 
-var navbar = document.getElementById("footer");
-var sticky = navbar.offsetBottom;
-function myFunction() {
-    if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky")
-    } else {
-        navbar.classList.remove("sticky");
+$(document).ready(
+    function() {
+        $("#borrow").click(
+            function(){
+                $("#borrowForm").slideToggle();
+            }
+        )
     }
-} 
-*/
+) 
 
-function borrow() {
+function borrowMoneyz() {
+    var number = parseInt($('#borrowInput').val());
     var gold = document.getElementById("gold");
     var debt = document.getElementById("debtValue");
-    var money = prompt("Enter amount to borrow", "1000");
+    var karma = parseInt(document.getElementById("happyzValue").innerHTML);
+    if (number <= karma + 100) {
+        gold.innerHTML = parseInt(gold.innerHTML) + number;
+        debt.innerHTML = parseInt(debt.innerHTML) + number;
+        playSell();
+    }
+    else if (isNaN(karma)) {
+        alert("ERROR");
+        console.log(karma);  
+    } 
+    else {
+        alert("You need more Karma!");
+        console.log(karma);
+    }
+}
 
-    if (isNaN(parseInt(money))) {
-        alert("Please input a valid amount.")
+function borrowMoneyzMax() {
+    var gold = document.getElementById("gold");
+    var debt = document.getElementById("debtValue");
+    var karma = document.getElementById("happyzValue");
+    gold.innerHTML = parseInt(gold.innerHTML) + parseInt(karma.innerHTML) + 100;
+    debt.innerHTML = parseInt(debt.innerHTML) + parseInt(karma.innerHTML) + 100;
+    playSell();
+}
+
+$(document).ready(
+    function() {
+        $("#repay").click(
+            function(){
+                $("#repayForm").slideToggle();
+            }
+        )
     }
-    else if (parseInt(money) != null) {
-        gold.innerHTML = parseInt(gold.innerHTML) + parseInt(money);
-        debt.innerHTML = parseInt(debt.innerHTML) + parseInt(money);
+) 
+
+function repayMoneyz() {
+    var number = parseInt( $('#repayInput').val() );
+    var gold = document.getElementById("gold");
+    var debt = document.getElementById("debtValue");
+    if (parseInt(gold.innerHTML) - number >= 0) {
+        gold.innerHTML = parseInt(gold.innerHTML) - number;
+        debt.innerHTML = parseInt(debt.innerHTML) - number;
+        playSell();
     }
+    else if (debt.innerHTML - number < 0) {
+        alert("You don't have that much debt to pay!");
+    }
+    else {
+        alert("You need more Moneyz!");
+    }
+}
+
+function repayAll() {
+    var gold = document.getElementById("gold");
+    var debt = document.getElementById("debtValue");
+    var karma = document.getElementById("happyzValue");
+    gold.innerHTML = parseInt(gold.innerHTML) - parseInt(debt.innerHTML);
+    debt.innerHTML = 0;
+    playSell();
 }
 
 function addInterest(){
@@ -169,23 +218,6 @@ function addInterest(){
     var increase = parseInt(debt.innerHTML);
     increase = Math.floor(increase * interest);
     debt.innerHTML = increase;
-  }
-
-function repay() {
-    var gold = document.getElementById("gold");
-    var debt = document.getElementById("debtValue");
-    var money = prompt("Enter amount to repay", "1000");
-
-    if (isNaN(parseInt(money))) {
-        alert("Please input a valid amount.")
-    }
-    else if (parseInt(money) != null && parseInt(gold.innerHTML) - parseInt(money) >= 0) {
-        gold.innerHTML = parseInt(gold.innerHTML) - parseInt(money);
-        debt.innerHTML = parseInt(debt.innerHTML) - parseInt(money);
-    } 
-    else {
-        alert("You need more Moneyz!")
-    }
 }
 
 /* End Bank Functions */
