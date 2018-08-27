@@ -1,5 +1,5 @@
 electron-builder.yml
-dist
+/dist
 ship.sh
 working files
 Trading-Game.code-workspace

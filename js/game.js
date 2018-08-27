@@ -102,17 +102,35 @@ $(document).ready(
             function() {
                 var bank = document.getElementById("bank");
                 var footer = document.getElementById("footer");
-                $("#bankPanel").slideToggle();
-                $("#game").slideToggle();
-                if (bank.innerHTML === "Visit Bank") {
-                    bank.innerHTML = "Leave Bank";
-                    /* footer.style.position = "fixed"; */
-                    footer.style.bottom ="0"; 
+                var test = document.getElementById("testButton");
+                if (test.innerHTML === "Open Test") {
+                    $("#bankPanel").slideToggle();
+                    $("#content").slideToggle();
+                    if (bank.innerHTML === "Visit Bank") {
+                        bank.innerHTML = "Leave Bank";
+                        /* footer.style.position = "fixed"; */
+                        footer.style.bottom ="0"; 
+                    }
+                    else {
+                        bank.innerHTML = "Visit Bank";
+                        /* footer.style.position = "initial"; */
+                        footer.style.bottom ="auto";
+                    }
                 }
                 else {
-                    bank.innerHTML = "Visit Bank";
-                    /* footer.style.position = "initial"; */
-                    footer.style.bottom ="auto";
+                    $("#bankPanel").slideToggle();
+                    $("#testFeatures").slideToggle();
+                    test.innerHTML = "Open Test";
+                    if (bank.innerHTML === "Visit Bank") {
+                        bank.innerHTML = "Leave Bank";
+                        /* footer.style.position = "fixed"; */
+                        footer.style.bottom ="0"; 
+                    }
+                    else {
+                        bank.innerHTML = "Visit Bank";
+                        /* footer.style.position = "initial"; */
+                        footer.style.bottom ="auto";
+                    }
                 }
             }
         )
@@ -171,3 +189,46 @@ function repay() {
 }
 
 /* End Bank Functions */
+
+/* Test Features */
+
+$(document).ready(
+    function() {
+        $("#testButton").click(
+            function() {
+                var test = document.getElementById("testButton");
+                var footer = document.getElementById("footer");
+                var bank = document.getElementById("bank");
+                if (bank.innerHTML === "Visit Bank") {
+                    $("#testFeatures").slideToggle();
+                    $("#content").slideToggle();
+                    if (test.innerHTML === "Open Test") {
+                        test.innerHTML = "Close Test";
+                        /* footer.style.position = "fixed"; */
+                        footer.style.bottom ="0"; 
+                    }
+                    else {
+                        test.innerHTML = "Open Test";
+                        /* footer.style.position = "initial"; */
+                        footer.style.bottom ="auto";
+                    }
+                }
+                else {
+                    $("#testFeatures").slideToggle();
+                    $("#bankPanel").slideToggle();
+                    bank.innerHTML = "Visit Bank";
+                    if (test.innerHTML === "Open Test") {
+                        test.innerHTML = "Close Test";
+                        /* footer.style.position = "fixed"; */
+                        footer.style.bottom ="0"; 
+                    }
+                    else {
+                        test.innerHTML = "Open Test";
+                        /* footer.style.position = "initial"; */
+                        footer.style.bottom ="auto";
+                    }
+                }
+            }
+        )
+    }
+)

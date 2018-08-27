@@ -11,6 +11,7 @@ html, body {
     right: 0px;
     margin: 0px;
     background-color: navy;
+    overflow-wrap: break-word;
 }
 
 h1 {
@@ -216,7 +217,7 @@ padding-top: 180px;
 
 #content {
     background-color: lime;
-    margin-top: 150px;
+    margin-top: 175px;
     overflow: auto;
 }
 
@@ -288,6 +289,23 @@ padding-top: 180px;
 }
 
 /* End Footer */
+
+/* Test Features */
+
+#testFeatures {
+    display: none;
+    text-align: center;
+    margin-top: 150px;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: red;
+}
+
+#testFeatures button {
+    margin: 0px 10px;
+}
+
+/* End Test Features */
 
 @media only screen and (max-width: 725px) {
     button {

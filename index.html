@@ -5,12 +5,14 @@
         <link rel=stylesheet type="text/css" href="css/game.css">
         <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="js/game.js"></script>
+        <script>window.jQuery || document.write('<script src="fallback/jquery.3.3.1.min.js"><\/script>')</script>
         <script src="js/audio.js"></script>
         <script>if (window.module) module = window.module;</script>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     </head>
     <body>
+        <!-- Redundant <script src="js/style.js"></script> -->
+        <script src="js/game.js"></script>
         <div id="navbar">
             <div id="valueBar">
                 <div id="debt">
@@ -35,7 +37,7 @@
                  </div>
 
                  <div id="earnRight">
-                    <button>Travel</button>
+                    <button id="testButton">Open Test</button>
                  </div>
                 <audio id="moneyz-sound" src="audio/volume.mp3" hidden="true"></audio>
             </div>
@@ -43,19 +45,27 @@
 
         <div id="bankPanel">
             <div id="borrowButton">
-                <button id="muteButton" onclick="borrow()">borrow money</button>
+                <button id="muteButton" onclick="borrow()">Borrow Money</button>
             </div>
 
             <div id="repayButton">
-                <button id="muteButton" onclick="repay()">repay debt</button>
+                <button id="muteButton" onclick="repay()">Repay Debt</button>
             </div>
         </div>
+
+        <div id="testFeatures">
+            <h1>Test Features</h1>
+            <button>Test1</button><button>Test2</button><button>Test3</button>
+        </div>
+
         <div id="content">
             <div id="game">
                 <audio id="backgroundMusic" autoplay="autoplay" loop>
                     <source src="audio/bgmusic.mp3" hidden="true" autostart="true">
                 </audio>
                 <audio id="sellSound" src="audio/sell.wav" hidden="true"></audio>
+
+                <h1>Flavourtown</h1>
 
                 <div id="item">
                     <h2>Coffee</h2>
@@ -110,6 +120,5 @@
                 <button id="muteButton" onclick="toggleMute()">Mute Music</button>
                 <p style="color:white;">Version: <span id="version">v0.2.0-alpha2</span></p>
         </div>
-        <!-- Redundant <script src="js/style.js"></script> -->
     </body>
 </html>
