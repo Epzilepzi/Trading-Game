@@ -1,6 +1,6 @@
 {
   "name": "spree",
-  "version": "0.3.2-alpha",
+  "version": "0.3.4-alpha",
   "description": "Spree - The hyperrealistic trading game.",
   "main": "main.js",
   "repository": "https://github.com/Epzilepzi/Trading-Game",
