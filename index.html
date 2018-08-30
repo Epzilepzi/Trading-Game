@@ -101,6 +101,7 @@
                 </div>
             </div>
 
+            <!-- Bank Menu-->
             <div id="bankPanel">
                 <h1>MonoBank</h1>
                 <div id="borrowButton">
@@ -139,11 +140,13 @@
                 </div>
             </div>
 
+            <!-- Menu menu-->
             <div id="menuFeatures">
                 <h1>Menu</h1>
                 <button onclick="backToMenu()">Change Town</button><button onclick="showDebtAlert()">Alert Test</button><button>Test3</button>
             </div>
 
+            <!-- Alert Dialogs -->
             <div id="alert">
                 <div id="alertbg"></div>
                 <audio id="error-sound" src="audio/error.wav" hidden="true"></audio>
@@ -177,12 +180,21 @@
                     <p>Your company doesn't want to pay you anymore! Start trading to earn more moneyz!</p>
                     <button class="alertbtn" onclick="closeWorkAlert()">Okay</button>
                 </div>
+
+                <div id="moreItem" class="alert">
+                    <h1>Error</h1>
+                    <p>You need more <span id="sellItem">item</span>!</p>
+                    <button class="alertbtn" onclick="closeItemAlert()">Okay</button>
+                </div>
             </div>
 
+            <!-- Game Content -->
             <div id="content">
                 <audio id="bgmusic" loop>
                     <source src="audio/intromusic.mp3" hidden="true">
                 </audio>
+
+                <!-- Flavourtown -->
                 <div id="flavourtown">
                     <audio id="sellSound" src="audio/sell.wav" hidden="true"></audio>
 
@@ -237,6 +249,7 @@
                     </div>
                 </div>
 
+                <!-- Meme Valley -->
                 <div id="meme">
                         <audio id="sellSound" src="audio/sell.wav" hidden="true"></audio>
     
@@ -244,14 +257,14 @@
     
                         <div id="item">
                             <h2>Spoderman</h2>
-                            <p>Amount: <span id="spoder">0</span></p>
-                            <p>Cost: <span id="spoder-cost">39</span> updoots</p>
-                            <p>Happyz: <span id="spoder-happyz">20</span></p>
-                            <img src="images/spoder.jpg" alt="spoder"/>
+                            <p>Amount: <span id="spoderman">0</span></p>
+                            <p>Cost: <span id="spoderman-cost">39</span> updoots</p>
+                            <p>Happyz: <span id="spoderman-happyz">20</span></p>
+                            <img src="images/spoder.jpg" alt="spoderman"/>
                             <br>
-                            <button onclick="buy('spoder')">Buy</button>
-                            <button onclick="sell('spoder');">Sell</button>
-                            <audio id="spoder-sound" src="audio/spoder.mp3"></audio>
+                            <button onclick="buy('spoderman')">Buy</button>
+                            <button onclick="sell('spoderman');">Sell</button>
+                            <audio id="spoder-sound" src="audio/spoderman.mp3"></audio>
                         </div>
                         
                         <div id="item">
@@ -291,16 +304,20 @@
                         </div>
                     </div>
             </div>
-            <div id="footerButtons">
-                <a href="https://www.paypal.me/ltg1337" target="_blank"><button class="redbtn">Donate</button></a>
-            </div>
-            <div id="footer" class="main">
-                    <button id="muteButton" onclick="toggleMute()">Toggle Music</button>
-                    <p style="color:white;">Version: <span id="version">v0.3.4-alpha</span></p>
-            </div>
-            <div id="footerButtons">
-               <button class="redbtn">Dev Features</button>
-            </div>
+            <!-- Footer Stuff -->
+                <div id="footerButtons">
+                    <a href="https://www.paypal.me/ltg1337" target="_blank"><button class="redbtn">Donate</button></a>
+                </div>
+
+                <div id="footer" class="main">
+                        <button id="muteButton" onclick="toggleMute()">Toggle Music</button>
+                        <p style="color:white;">Version: <span id="version">v0.3.4-alpha</span></p>
+                </div>
+                
+                <div id="footerButtons">
+                <button class="redbtn">Dev Features</button>
+                </div>
+            <!-- End footer stuff -->
         </div>
     </body>
 </html>

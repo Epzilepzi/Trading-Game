@@ -43,7 +43,7 @@ function buy(item){
         gold.innerHTML = parseInt(gold.innerHTML) + parseInt(itemPrice.innerHTML);
         playSell();
     } else {
-        alert("You need more " + item + "!");
+        showItemAlert(item);
     }
 }
 
@@ -169,11 +169,11 @@ function borrowMoneyz() {
             playSell();
         }
         else if (isNaN(karma)) {
-            alert("ERROR");
+            alert("ERROR: something broke");
             console.log(karma);  
         } 
         else {
-            alert("You need more Karma!");
+            showItemAlert("karma");
             console.log(karma);
         }
     }
@@ -396,6 +396,19 @@ function showRepayAlert() {
 
 function closeRepayDebt() {
     $("#repayDebtAlert").hide();
+    $("#alert").hide();
+    play('moneyz');
+}
+
+function showItemAlert(item) {
+    document.getElementById("sellItem").innerHTML = item;
+    $("#moreItem").show();
+    $("#alert").show();
+    play("error");
+}
+
+function closeItemAlert() {
+    $("#moreItem").hide();
     $("#alert").hide();
     play('moneyz');
 }
