@@ -1,7 +1,7 @@
 {
-  "name": "trading-game",
-  "version": "0.2.0-alpha1",
-  "description": "Yeetmeister Trading Game v1",
+  "name": "spree",
+  "version": "0.3.2-alpha",
+  "description": "Spree - The hyperrealistic trading game.",
   "main": "main.js",
   "repository": "https://github.com/Epzilepzi/Trading-Game",
   "scripts": {
@@ -16,11 +16,11 @@
     "ajv": "^6.5.3",
     "asar": "^0.14.3",
     "electron": "^2.0.8",
-    "electron-builder": "^20.28.2"
+    "electron-builder": "^20.28.3"
   },
   "build": {
-    "productName": "Trading Game",
-    "appId": "com.yeetmeister.game",
+    "productName": "Spree",
+    "appId": "com.yeetmeister.spree",
     "win": {
       "target": "nsis",
       "icon": "icons/icon.ico"
@@ -31,7 +31,8 @@
     }
   },
   "dependencies": {
-    "electron-updater": "^3.1.1",
-    "jquery": "^3.3.1"
+    "electron-updater": "^3.1.2",
+    "jquery": "^3.3.1",
+    "jshint": "^2.9.6"
   }
 }

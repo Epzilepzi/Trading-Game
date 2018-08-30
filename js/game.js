@@ -1,3 +1,9 @@
+$(document).ready (
+    function () {
+        console.log("game.js loaded.");
+    }
+);
+
 /* Trading Functions */
 
 // Buy Stuff
@@ -16,7 +22,7 @@ function buy(item){
         gold.innerHTML = parseInt(gold.innerHTML) - parseInt(itemPrice.innerHTML);
         play(item);
     } else {
-        alert("You need more Moneyz!");
+        showMoneyzAlert(item);
     }
 }
 
@@ -49,7 +55,7 @@ function earnMoneyz() {
     var array = ["pizza", "coffee", "tea", "burger"];
     
     if (parseInt(gold.innerHTML) >= 1000) {
-        alert('You cannot earn any more moneyz from working!!! Start trading!!!');
+        showWorkAlert();
     } else if (parseInt(gold.innerHTML) + parseInt(randomNumber) <= 1000) {
         if (parseInt(gold.innerHTML) + parseInt(randomNumber) >= 0) {
         gold.innerHTML = parseInt(gold.innerHTML) + parseInt(randomNumber);
@@ -64,6 +70,7 @@ function earnMoneyz() {
     changePrices(array[1]);
     changePrices(array[2]);
     changePrices(array[3]);
+    play('moneyz');
     loseKarma();
 }
 
@@ -102,8 +109,8 @@ $(document).ready(
             function() {
                 var bank = document.getElementById("bank");
                 var footer = document.getElementById("footer");
-                var test = document.getElementById("testButton");
-                if (test.innerHTML === "Open Test") {
+                var menu = document.getElementById("menuButton");
+                if (menu.innerHTML === "Open Menu") {
                     $("#bankPanel").slideToggle();
                     $("#content").slideToggle();
                     if (bank.innerHTML === "Visit Bank") {
@@ -119,8 +126,8 @@ $(document).ready(
                 }
                 else {
                     $("#bankPanel").slideToggle();
-                    $("#testFeatures").slideToggle();
-                    test.innerHTML = "Open Test";
+                    $("#menuFeatures").slideToggle();
+                    menu.innerHTML = "Open Menu";
                     if (bank.innerHTML === "Visit Bank") {
                         bank.innerHTML = "Leave Bank";
                         /* footer.style.position = "fixed"; */
@@ -133,9 +140,9 @@ $(document).ready(
                     }
                 }
             }
-        )
+        );
     }
-)
+);
 
 $(document).ready(
     function() {
@@ -143,37 +150,47 @@ $(document).ready(
             function(){
                 $("#borrowForm").slideToggle();
             }
-        )
+        );
     }
-) 
+); 
 
 function borrowMoneyz() {
     var number = parseInt($('#borrowInput').val());
     var gold = document.getElementById("gold");
-    var debt = document.getElementById("debtValue");
+    var debt = document.getElementById("debt-cost");
     var karma = parseInt(document.getElementById("happyzValue").innerHTML);
-    if (number <= karma + 100) {
-        gold.innerHTML = parseInt(gold.innerHTML) + number;
-        debt.innerHTML = parseInt(debt.innerHTML) + number;
-        playSell();
+    if (parseInt(debt.innerHTML) >= parseInt(karma) + 100) {
+        showRepayAlert();
     }
-    else if (isNaN(karma)) {
-        alert("ERROR");
-        console.log(karma);  
-    } 
     else {
-        alert("You need more Karma!");
-        console.log(karma);
+        if (number <= karma + 100) {
+            gold.innerHTML = parseInt(gold.innerHTML) + number;
+            debt.innerHTML = parseInt(debt.innerHTML) + number;
+            playSell();
+        }
+        else if (isNaN(karma)) {
+            alert("ERROR");
+            console.log(karma);  
+        } 
+        else {
+            alert("You need more Karma!");
+            console.log(karma);
+        }
     }
 }
 
 function borrowMoneyzMax() {
     var gold = document.getElementById("gold");
-    var debt = document.getElementById("debtValue");
+    var debt = document.getElementById("debt-cost");
     var karma = document.getElementById("happyzValue");
-    gold.innerHTML = parseInt(gold.innerHTML) + parseInt(karma.innerHTML) + 100;
-    debt.innerHTML = parseInt(debt.innerHTML) + parseInt(karma.innerHTML) + 100;
-    playSell();
+    if (parseInt(debt.innerHTML) >= parseInt(karma.innerHTML) + 100) {
+        showRepayAlert();
+    }
+    else {
+        gold.innerHTML = parseInt(gold.innerHTML) + parseInt(karma.innerHTML) + 100;
+        debt.innerHTML = parseInt(debt.innerHTML) + parseInt(karma.innerHTML) + 100;
+        playSell();
+    }
 }
 
 $(document).ready(
@@ -182,38 +199,52 @@ $(document).ready(
             function(){
                 $("#repayForm").slideToggle();
             }
-        )
+        );
     }
-) 
+); 
 
 function repayMoneyz() {
     var number = parseInt( $('#repayInput').val() );
     var gold = document.getElementById("gold");
-    var debt = document.getElementById("debtValue");
-    if (parseInt(gold.innerHTML) - number >= 0) {
+    var debt = document.getElementById("debt-cost");
+    var karma = document.getElementById("happyzValue");
+    if (parseInt(gold.innerHTML) - number >= 0 && parseInt(debt.innerHTML) > 0) {
         gold.innerHTML = parseInt(gold.innerHTML) - number;
         debt.innerHTML = parseInt(debt.innerHTML) - number;
+        karma.innerHTML = parseInt(karma.innerHTML) + number;
         playSell();
     }
-    else if (debt.innerHTML - number < 0) {
-        alert("You don't have that much debt to pay!");
+    else if (parseInt(debt.innerHTML) === 0) {
+        nilDebtAlert();
+    }
+    else if (parseInt(debt.innerHTML) - number < 0) {
+        showDebtAlert();
     }
     else {
-        alert("You need more Moneyz!");
+        showMoneyzAlert("debt");
     }
 }
 
 function repayAll() {
     var gold = document.getElementById("gold");
-    var debt = document.getElementById("debtValue");
+    var debt = document.getElementById("debt-cost");
     var karma = document.getElementById("happyzValue");
-    gold.innerHTML = parseInt(gold.innerHTML) - parseInt(debt.innerHTML);
-    debt.innerHTML = 0;
-    playSell();
+    if (parseInt(debt.innerHTML) === 0) {
+        nilDebtAlert();
+    }
+    else if (parseInt(gold.innerHTML) - parseInt(debt.innerHTML) >= 0) {
+        gold.innerHTML = parseInt(gold.innerHTML) - parseInt(debt.innerHTML);
+        karma.innerHTML = parseInt(karma.innerHTML) + parseInt(debt.innerHTML);
+        debt.innerHTML = 0;
+        playSell();
+    }
+    else if (parseInt(gold.innerHTML) - parseInt(debt.innerHTML) < 0) {
+        showMoneyzAlert('debt');
+    }
 }
 
 function addInterest(){
-    var debt = document.getElementById("debtValue");
+    var debt = document.getElementById("debt-cost");
     var interest = 1.012;
     var increase = parseInt(debt.innerHTML);
     increase = Math.floor(increase * interest);
@@ -226,41 +257,145 @@ function addInterest(){
 
 $(document).ready(
     function() {
-        $("#testButton").click(
+        $("#menuButton").click(
             function() {
-                var test = document.getElementById("testButton");
+                var menu = document.getElementById("menuButton");
                 var footer = document.getElementById("footer");
                 var bank = document.getElementById("bank");
                 if (bank.innerHTML === "Visit Bank") {
-                    $("#testFeatures").slideToggle();
+                    $("#menuFeatures").slideToggle();
                     $("#content").slideToggle();
-                    if (test.innerHTML === "Open Test") {
-                        test.innerHTML = "Close Test";
+                    if (menu.innerHTML === "Open Menu") {
+                        menu.innerHTML = "Close Menu";
                         /* footer.style.position = "fixed"; */
                         footer.style.bottom ="0"; 
                     }
                     else {
-                        test.innerHTML = "Open Test";
+                        menu.innerHTML = "Open Menu";
                         /* footer.style.position = "initial"; */
                         footer.style.bottom ="auto";
                     }
                 }
                 else {
-                    $("#testFeatures").slideToggle();
+                    $("#menuFeatures").slideToggle();
                     $("#bankPanel").slideToggle();
                     bank.innerHTML = "Visit Bank";
-                    if (test.innerHTML === "Open Test") {
-                        test.innerHTML = "Close Test";
+                    if (menu.innerHTML === "Open Menu") {
+                        menu.innerHTML = "Close Menu";
                         /* footer.style.position = "fixed"; */
                         footer.style.bottom ="0"; 
                     }
                     else {
-                        test.innerHTML = "Open Test";
+                        menu.innerHTML = "Open Menu";
                         /* footer.style.position = "initial"; */
                         footer.style.bottom ="auto";
                     }
                 }
             }
-        )
+        );
     }
-)
+);
+
+function backToMenu() {
+    var town = ["flavourtown", "meme"];
+    var menu = document.getElementById("menuButton");
+    var music = document.getElementById("bgmusic");
+    menu.innerHTML = "Open Menu";
+    $("#menuFeatures").fadeToggle(1000);
+    $("#content").fadeToggle(1000);
+    $("#body").fadeToggle(1000);
+    $("#mainMenu").fadeIn(1000);
+    /* document.getElementById(town[0]).fadeOut(1000);
+    document.getElementById(town[1]).fadeOut(1000); */
+    document.getElementById(town[0]).style.display = "none";
+    document.getElementById(town[1]).style.display = "none";
+    music.src = "audio/intromusic.mp3";
+    playBg("bgmusic");
+}
+
+/* Alerts */
+function showMoneyzAlert(item) {
+    var itemCost = parseInt(document.getElementById(item + "-cost").innerHTML);
+    var gold = parseInt(document.getElementById("gold").innerHTML);
+    var short = document.getElementById("moreUpdoot");
+    short.innerHTML = itemCost - gold;
+    $("#moneyzAlert").show();
+    $("#alert").show();
+    play("error");
+}
+
+function closeMoneyzAlert() {
+    $("#moneyzAlert").hide();
+    $("#alert").hide();
+    play('moneyz');
+}
+
+function showDebtAlert() {
+    debt = parseInt(document.getElementById("debt-cost").innerHTML);
+    var short = document.getElementById("debtAlertValue");
+    short.innerHTML = debt;
+    $("#noDebtAlert").show();
+    $("#alert").show();
+    play("error");
+}
+
+function closeDebtAlert() {
+    $("#noDebtAlert").hide();
+    $("#alert").hide();
+    play('moneyz');
+}
+
+function payRemainingDebt() {
+    var gold = document.getElementById("gold");
+    var debt = document.getElementById("debt-cost");
+    var karma = document.getElementById("happyzValue");
+    var short = document.getElementById("moreUpdoot");
+    if (parseInt(gold.innerHTML) - parseInt(debt.innerHTML) >= 0) {
+        gold.innerHTML = parseInt(gold.innerHTML) - parseInt(debt.innerHTML);
+        debt.innerHTML = parseInt(debt.innerHTML) - parseInt(debt.innerHTML);
+        karma.innerHTML = parseInt(karma.innerHTML) + parseInt(debt.innerHTML);
+        playSell();
+        closeDebtAlert();
+    }
+    else if (parseInt(gold.innerHTML) - parseInt(debt.innerHTML) < 0) {
+        $("#noDebtAlert").hide();
+        $("#alert").hide();
+        showMoneyzAlert("debt");
+    }
+}
+
+function showWorkAlert() {
+    $("#startWork").show();
+    $("#alert").show();
+    play("error");
+}
+
+function closeWorkAlert() {
+    $("#startWork").hide();
+    $("#alert").hide();
+    play('moneyz');
+}
+
+function nilDebtAlert() {
+    $("#nilDebtAlert").show();
+    $("#alert").show();
+    play("error");
+}
+
+function closeNilDebt() {
+    $("#nilDebtAlert").hide();
+    $("#alert").hide();
+    play('moneyz');
+}
+
+function showRepayAlert() {
+    $("#repayDebtAlert").show();
+    $("#alert").show();
+    play("error");
+}
+
+function closeRepayDebt() {
+    $("#repayDebtAlert").hide();
+    $("#alert").hide();
+    play('moneyz');
+}

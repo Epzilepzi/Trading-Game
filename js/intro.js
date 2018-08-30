@@ -1,19 +1,29 @@
 $(document).ready (
     function () {
+        console.log("intro.js loaded.");
+    }
+);
+
+$(document).ready (
+    function () {
         var devMode = false;
         if (devMode) {
             closeIntro();
         }
         else {
             introMusic();
+            $("body").css("overflow", "hidden");
+            $("#titleScreen-content").fadeIn(3000);
+            $("#titleSubtitle").fadeIn(3000);
+            $("#playButton").fadeIn(9000);
         }
     }
-)
+);
 
 function closeIntro() {
-    var audio = document.getElementById("introMusic");
-    document.getElementById("intro").style.display = "none";
-    audio.pause();
+    $("#intro").fadeOut(3000);
+    $("#titleScreen-content").fadeOut(3000);
+    $("body").css("overflow", "auto");
     // stopMusic(intro);
 }
 
