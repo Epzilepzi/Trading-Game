@@ -1,6 +1,6 @@
 const {app, BrowserWindow, Menu, protocol, ipcMain} = require('electron');
 const {autoUpdater} = require("electron-updater");
-const {productURL} = 'https://github.com/Epzilepzi/Trading-Game/releases'
+const {productURL} = 'https://github.com/Epzilepzi/Trading-Game/releases';
 
 /* menu */
 let template = [];
