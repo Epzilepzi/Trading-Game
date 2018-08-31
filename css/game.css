@@ -334,7 +334,7 @@ padding-top: 180px;
 } 
 */
 
-#bankPanel input[type='number'] {
+#bankPanel input[type=number] {
     -moz-appearance:textfield;
 }
 
@@ -622,6 +622,55 @@ padding-top: 180px;
     padding: 10px 15px;
     margin-bottom: 30px;
     margin-top: 0px;
+}
+
+#alert input[type=submit] {
+    background-color: blue;
+    color: white;
+    padding: 10px 15px;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 2px 5px 2px #999;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+    
+#alert input[type=submit]:ACTIVE {
+    box-shadow: 1px 3px 2px #999;
+    transform: translateY(2px);
+}
+
+#alert input[type=text] {
+    margin-top: 10px;
+    width: 50%;
+    font-size: 20px;
+    text-align: center;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    margin-bottom: 0px;
+}
+
+#alert form {
+    margin: 20px 10px 10px 10px;
+    font-size: 24px;
+}
+
+#alert #secret button {
+    background-color: blue;
+    color: white;
+    padding: 10px 15px;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 2px 5px 2px #999;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 /* Broken Close Button 
 .closebtn {

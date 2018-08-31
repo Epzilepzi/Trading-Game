@@ -6,7 +6,7 @@
         <link rel=stylesheet type="text/css" href="css/game.css">
         <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="fallback/jquery.3.3.1.min.js"><\/script>')</script>
+        <script src="fallback/jquery-3.3.1.min.js"></script>
         <!-- <script src="js/pace.min.js"></script> -->
         <script>
                 $(document).ready (
@@ -24,6 +24,7 @@
         <script src="js/intro.js"></script>
         <script src="js/game.js"></script>
         <script src="js/menu.js"></script>
+        <script src="js/dev.js"></script>
         <script>
                 $(document).ready (
                     function () {
@@ -150,6 +151,8 @@
             <div id="alert">
                 <div id="alertbg"></div>
                 <audio id="error-sound" src="audio/error.wav" hidden="true"></audio>
+                <audio id="secret-sound" src="audio/secret.mp3" hidden="true"></audio>
+                <audio id="xp-sound" src="audio/xp.wav" hidden="true"></audio>
                 <div id="moneyzAlert" class="alert">
                     <h1>Error</h1>
                     <p>You need more <span id="moreUpdoot">0</span> more updoots!</p>
@@ -186,6 +189,32 @@
                     <p>You need more <span id="sellItem">item</span>!</p>
                     <button class="alertbtn" onclick="closeItemAlert()">Okay</button>
                 </div>
+
+                <div id="secret" class="alert">
+                    <h1>DevMode</h1>
+                    <form action="javascript:void(0)" onsubmit="javascript:devMode()">
+                        Secret Phrase<br>
+                        <input type="text" id="secretPhrase"><br>
+                        <!-- <button onclick="closeSecret()">Cancel</button> -->
+                        <input type="submit" value="Enter">
+                    </form>
+                </div>
+
+                <div id="passError" class="alert">
+                    <h1>Error</h1>
+                    <p>Incorrect Passphrase</p>
+                    <button class="alertbtn" onclick="closePassError()">Okay</button>
+                </div>
+
+                <div id="devPanel" class="alert">
+                    <h1>Dev Features</h1>
+                    <br>
+                    <button onclick="closeDevMode()">Test 1</button>
+                    <button onclick="closeDevMode()">Test 2</button>
+                    <button onclick="closeDevMode()">Test 3</button>
+                    <br>
+                    <button onclick="closeDevMode()">Close Dev Features</button>
+                </div>
             </div>
 
             <!-- Game Content -->
@@ -203,8 +232,8 @@
                     <div id="item">
                         <h2>Coffee</h2>
                         <p>Amount: <span id="coffee">0</span></p>
-                        <p>Cost: <span id="coffee-cost">10</span> updoots</p>
-                        <p>Happyz: <span id="coffee-happyz">7</span></p>
+                        <p>Cost: <span id="coffee-cost" class="prices">10</span> updoots</p>
+                        <p>Happyz: <span id="coffee-happyz" class="happyz">7</span></p>
                         <img src="images/coffee.png" alt="coffee"/>
                         <br>
                         <button onclick="buy('coffee');">Buy</button>
@@ -215,8 +244,8 @@
                     <div id="item">
                         <h2>Pizza</h2>
                         <p>Amount: <span id="pizza">0</span></p>
-                        <p>Cost: <span id="pizza-cost">35</span> updoots</p>
-                        <p>Happyz: <span id="pizza-happyz">21</span></p>
+                        <p>Cost: <span id="pizza-cost" class="prices">35</span> updoots</p>
+                        <p>Happyz: <span id="pizza-happyz" class="happyz">21</span></p>
                         <img src="images/pizza.png" alt="pizza"/>
                         <br>
                         <button onclick="buy('pizza')">Buy</button>
@@ -227,8 +256,8 @@
                     <div id="item">
                         <h2>Tea</h2>
                         <p>Amount: <span id="tea">0</span></p>
-                        <p>Cost: <span id="tea-cost">8</span> updoots</p>
-                        <p>Happyz: <span id="tea-happyz">6</span></p>
+                        <p>Cost: <span id="tea-cost" class="prices">8</span> updoots</p>
+                        <p>Happyz: <span id="tea-happyz" class="happyz">6</span></p>
                         <img src="images/tea.png" alt="tea"/>
                         <br>
                         <button onclick="buy('tea');">Buy</button>
@@ -239,8 +268,8 @@
                     <div id="item">
                         <h2>Burger</h2>
                         <p>Amount: <span id="burger">0</span></p>
-                        <p>Cost: <span id="burger-cost">30</span> updoots</p>
-                        <p>Happyz: <span id="burger-happyz">14</span></p>
+                        <p>Cost: <span id="burger-cost" class="prices">30</span> updoots</p>
+                        <p>Happyz: <span id="burger-happyz" class="happyz">14</span></p>
                         <img src="images/burger.png" alt="burger"/>
                         <br>
                         <button onclick="buy('burger')">Buy</button>
@@ -258,8 +287,8 @@
                         <div id="item">
                             <h2>Spoderman</h2>
                             <p>Amount: <span id="spoderman">0</span></p>
-                            <p>Cost: <span id="spoderman-cost">39</span> updoots</p>
-                            <p>Happyz: <span id="spoderman-happyz">20</span></p>
+                            <p>Cost: <span id="spoderman-cost" class="prices">39</span> updoots</p>
+                            <p>Happyz: <span id="spoderman-happyz" class="happyz">20</span></p>
                             <img src="images/spoder.jpg" alt="spoderman"/>
                             <br>
                             <button onclick="buy('spoderman')">Buy</button>
@@ -270,8 +299,8 @@
                         <div id="item">
                             <h2>Pepe</h2>
                             <p>Amount: <span id="pepe">0</span></p>
-                            <p>Cost: <span id="pepe-cost">69</span> updoots</p>
-                            <p>Happyz: <span id="pepe-happyz">69</span></p>
+                            <p>Cost: <span id="pepe-cost" class="prices">69</span> updoots</p>
+                            <p>Happyz: <span id="pepe-happyz" class="happyz">69</span></p>
                             <img src="images/pepe.jpg" alt="pepe"/>
                             <br>
                             <button onclick="buy('pepe')">Buy</button>
@@ -282,8 +311,8 @@
                         <div id="item">
                             <h2>Doge</h2>
                             <p>Amount: <span id="doge">0</span></p>
-                            <p>Cost: <span id="doge-cost">41</span> updoots</p>
-                            <p>Happyz: <span id="doge-happyz">83</span></p>
+                            <p>Cost: <span id="doge-cost" class="prices">41</span> updoots</p>
+                            <p>Happyz: <span id="doge-happyz" class="happyz">83</span></p>
                             <img src="images/doge.jpg" alt="doge"/>
                             <br>
                             <button onclick="buy('doge')">Buy</button>
@@ -294,8 +323,8 @@
                         <div id="item">
                             <h2>Kazoo</h2>
                             <p>Amount: <span id="kazoo">0</span></p>
-                            <p>Cost: <span id="kazoo-cost">54</span> updoots</p>
-                            <p>Happyz: <span id="kazoo-happyz">72</span></p>
+                            <p>Cost: <span id="kazoo-cost" class="prices">54</span> updoots</p>
+                            <p>Happyz: <span id="kazoo-happyz" class="happyz">72</span></p>
                             <img src="images/kazoo.jpeg" alt="kazoo"/>
                             <br>
                             <button onclick="buy('kazoo')">Buy</button>
@@ -311,11 +340,11 @@
 
                 <div id="footer" class="main">
                         <button id="muteButton" onclick="toggleMute()">Toggle Music</button>
-                        <p style="color:white;">Version: <span id="version">v0.3.4-alpha</span></p>
+                        <p style="color:white;">Version: <span id="version">v0.3.4-alpha2</span></p>
                 </div>
                 
                 <div id="footerButtons">
-                <button class="redbtn">Dev Features</button>
+                <button class="redbtn" onclick="showDevMode();">Dev Features</button>
                 </div>
             <!-- End footer stuff -->
         </div>

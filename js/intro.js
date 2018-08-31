@@ -6,7 +6,7 @@ $(document).ready (
 
 $(document).ready (
     function () {
-        var devMode = false;
+        var devMode = true;
         if (devMode) {
             closeIntro();
         }

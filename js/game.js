@@ -52,7 +52,7 @@ function earnMoneyz() {
     var gold = document.getElementById("gold");
     var random = Math.floor(Math.random() * 16);
     var randomNumber = random - 5;
-    var array = ["pizza", "coffee", "tea", "burger"];
+    var array = ["pizza", "coffee", "tea", "burger", "spoderman", "pepe", "doge", "kazoo"];
     
     if (parseInt(gold.innerHTML) >= 1000) {
         showWorkAlert();
@@ -65,11 +65,16 @@ function earnMoneyz() {
         gold.innerHTML = parseInt(gold.innerHTML) + (1000 - parseInt(gold.innerHTML));
         addInterest();
     }
-
     changePrices(array[0]);
     changePrices(array[1]);
     changePrices(array[2]);
     changePrices(array[3]);
+    changePrices(array[4]);
+    changePrices(array[5]);
+    changePrices(array[6]);
+    changePrices(array[7]);
+    
+    /* changePricesTest(); */
     play('moneyz');
     loseKarma();
 }
@@ -81,7 +86,7 @@ function changePrices(item) {
     var rand = Math.floor(Math.random() * 11) - 5;
     var randHappyz = Math.floor(Math.random() * 21) - 10;
 
-    if(parseInt(itemPrice.innerHTML) + rand >= 2 && parseInt(itemPrice.innerHTML) + rand <= 51) {
+    if(parseInt(itemPrice.innerHTML) + rand >= 2 && parseInt(itemPrice.innerHTML) + rand <= 100) {
     itemPrice.innerHTML = parseInt(itemPrice.innerHTML) + rand;
     }
 
@@ -163,7 +168,7 @@ function borrowMoneyz() {
         showRepayAlert();
     }
     else {
-        if (number <= karma + 100) {
+        if (number <= karma + 100 && karma > 0) {
             gold.innerHTML = parseInt(gold.innerHTML) + number;
             debt.innerHTML = parseInt(debt.innerHTML) + number;
             playSell();
@@ -412,3 +417,20 @@ function closeItemAlert() {
     $("#alert").hide();
     play('moneyz');
 }
+
+/*
+function changePricesTest() {
+    var price = document.getElementsByClassName("prices");
+    var happyz = document.getElementsByClassName("happyz");
+    var rand = Math.floor(Math.random() * 11) - 5;
+    var randHappyz = Math.floor(Math.random() * 21) - 10;
+
+    if(parseInt(price.innerHTML) + rand >= 2 && parseInt(itemPrice.innerHTML) + rand <= 51) {
+        price.innerHTML = parseInt(price.innerHTML) + rand;
+    }
+
+    if(parseInt(happyz.innerHTML) + randHappyz >= 5 && parseInt(happyz.innerHTML) + randHappyz <= 150) {
+        happyz.innerHTML = parseInt(happyz.innerHTML) + randHappyz;
+    }
+}
+*/
