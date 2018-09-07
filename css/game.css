@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
 @-ms-viewport{
     width: device-width;
 }
@@ -115,11 +117,24 @@ button:ACTIVE {
 #mainMenu {
     top: 0;
     padding: 30px;
-    position: fixed;
+    /* position: fixed; */
 }
 
 #mainMenu h1 {
     color: white;
+    margin: 0px;
+}
+
+#menu-gold-text {
+    color: white;
+    margin: 20px;
+    text-align: center;
+    font-weight: normal;
+}
+
+#mainMenu button {
+    font-size: 18px;
+    padding: 10px 15px;
 }
 
 #mainMenu #item {
@@ -127,6 +142,7 @@ button:ACTIVE {
     float: left;
     text-align: center;
     margin: 2.5%;
+    margin-top: 0px;
     background-color: red;
 }
 
@@ -463,9 +479,24 @@ padding-top: 180px;
     text-align: center;
     margin: 2.5%;
     background-color: red;
+    margin-top: 0px;
+}
+
+.item-content {
+    display: none;
+    animation: fadeIn .5s ease-in 1 forwards;
+}
+
+.unlock {
+    display: block;
+    animation: fadeOut .5s ease-in 1 forwards;
 }
 
 #item img {
+    max-width: 40%;
+}
+
+.unlock img {
     max-width: 40%;
 }
 
@@ -600,6 +631,11 @@ padding-top: 180px;
     background-color: white;
     padding: 0px;
     display: none;
+    z-index: 1;
+}
+
+#devPanel img {
+    margin: 1%;
 }
 
 #alert h1 {
@@ -644,6 +680,17 @@ padding-top: 180px;
 }
 
 #alert input[type=text] {
+    margin-top: 10px;
+    width: 50%;
+    font-size: 20px;
+    text-align: center;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    margin-bottom: 0px;
+}
+
+#alert input[type=password] {
     margin-top: 10px;
     width: 50%;
     font-size: 20px;

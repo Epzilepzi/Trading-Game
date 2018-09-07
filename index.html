@@ -32,6 +32,80 @@
                     }
                 )
         </script>
+        <!-- Alert Dialogs -->
+        <div id="alert">
+            <!-- <div id="alertbg"></div> -->
+            <audio id="error-sound" src="audio/error.wav" hidden="true"></audio>
+            <audio id="secret-sound" src="audio/secret.mp3" hidden="true"></audio>
+            <audio id="xp-sound" src="audio/xp.wav" hidden="true"></audio>
+            <div id="moneyzAlert" class="alert">
+                <h1>Error</h1>
+                <p>You need <span id="moreUpdoot">0</span> more updoots!</p>
+                <button class="alertbtn" onclick="closeMoneyzAlert()">Okay</button>
+            </div>
+
+            <div id="karmaAlert" class="alert">
+                <h1>Error</h1>
+                <p>You need <span id="moreKarma">0</span> more karma!</p>
+                <button class="alertbtn" onclick="closeKarmaAlert()">Okay</button>
+            </div>
+
+            <div id="noDebtAlert" class="alert">
+                <h1>Error</h1>
+                <p>You only have a debt of <span id="debtAlertValue">0</span> updoots!</p>
+                <button class="alertbtn" onclick="payRemainingDebt()">Pay off debt</button>
+                <button class="alertbtn" onclick="closeDebtAlert()">Okay</button>
+            </div>
+
+            <div id="nilDebtAlert" class="alert">
+                <h1>Error</h1>
+                <p>You don't have any debt!</p>
+                <button class="alertbtn" onclick="closeNilDebt()">Okay</button>
+            </div>
+
+            <div id="repayDebtAlert" class="alert">
+                <h1>Error</h1>
+                <p>You have reached your borrow limit!</p>
+                <button clas="alertbtn" onclick="closeRepayDebt()">Okay</button>
+            </div>
+
+            <div id="startWork" class="alert">
+                <h1>Error</h1>
+                <p>Your company doesn't want to pay you anymore! Start trading to earn more moneyz!</p>
+                <button class="alertbtn" onclick="closeWorkAlert()">Okay</button>
+            </div>
+
+            <div id="moreItem" class="alert">
+                <h1>Error</h1>
+                <p>You need more <span id="sellItem">item</span>!</p>
+                <button class="alertbtn" onclick="closeItemAlert()">Okay</button>
+            </div>
+
+            <div id="secret" class="alert">
+                <h1>DevMode</h1>
+                <form action="javascript:void(0)" onsubmit="javascript:devMode()">
+                    Secret Phrase<br>
+                    <input type="password" id="secretPhrase"><br>
+                    <!-- <button onclick="closeSecret()">Cancel</button> -->
+                    <input type="submit" value="Enter">
+                </form>
+            </div>
+
+            <div id="passError" class="alert">
+                <h1>Error</h1>
+                <p>Incorrect Passphrase</p>
+                <button class="alertbtn" onclick="closePassError()">Okay</button>
+            </div>
+
+            <div id="devPanel" class="alert">
+                <h1>Dev Features</h1>
+                <br>
+                <button onclick="closeDevMode();showDebtAlert()">Debt Test</button>
+                <button onclick="maxUpdoots()">Give Updoots</button>
+                <button onclick="closeDevMode()">Test 3</button>
+                <button onclick="closeDevMode()">Close Dev Features</button>
+            </div>
+        </div>
         <div id="intro" class="titleScreen">
             <audio id="introMusic" src="audio/intromusic.mp3" hidden="true" loop></audio>
             <div id="titleScreen-content">
@@ -46,9 +120,10 @@
 
         <div id="mainMenu">
             <h1>Select Town</h1>
+            <h2 id="menu-gold-text">Moneyz: <span id="menu-gold">0</span> updoots</h2>
             <div id="item">
                 <h2>Flavourtown</h2>
-                <p>Population: 46k</p>
+                <p>Housing Cost: <span id="flavourtown-cost">499900</span> updoots</p>
                 <p>Item Specialty: Foodstuff</p>
                 <img src="images/burger.png" />
                 <br>
@@ -58,7 +133,7 @@
 
             <div id="item">
                 <h2>Meme Valley</h2>
-                <p>Population: 14k</p>
+                <p>Housing Cost: <span id="meme-cost">824000</span> updoots</p>
                 <p>Item Specialty: Dead memes</p>
                 <img src="images/monobank.png" />
                 <br>
@@ -78,7 +153,7 @@
                         <p id="valueText3">Debt: <span id="debt-cost">0</span> updoots</p>
                     </div>
                     <div id="moneyz">
-                        <p id="valueText1">Moneyz: <span id="gold">100</span> updoots</p>
+                        <p id="valueText1">Moneyz: <span id="gold">500000</span> updoots</p>
                     </div>
 
                     <div id="happyz">
@@ -144,77 +219,7 @@
             <!-- Menu menu-->
             <div id="menuFeatures">
                 <h1>Menu</h1>
-                <button onclick="backToMenu()">Change Town</button><button onclick="showDebtAlert()">Alert Test</button><button>Test3</button>
-            </div>
-
-            <!-- Alert Dialogs -->
-            <div id="alert">
-                <div id="alertbg"></div>
-                <audio id="error-sound" src="audio/error.wav" hidden="true"></audio>
-                <audio id="secret-sound" src="audio/secret.mp3" hidden="true"></audio>
-                <audio id="xp-sound" src="audio/xp.wav" hidden="true"></audio>
-                <div id="moneyzAlert" class="alert">
-                    <h1>Error</h1>
-                    <p>You need more <span id="moreUpdoot">0</span> more updoots!</p>
-                    <button class="alertbtn" onclick="closeMoneyzAlert()">Okay</button>
-                </div>
-
-                <div id="noDebtAlert" class="alert">
-                    <h1>Error</h1>
-                    <p>You only have a debt of <span id="debtAlertValue">0</span> updoots!</p>
-                    <button class="alertbtn" onclick="payRemainingDebt()">Pay off debt</button>
-                    <button class="alertbtn" onclick="closeDebtAlert()">Okay</button>
-                </div>
-
-                <div id="nilDebtAlert" class="alert">
-                    <h1>Error</h1>
-                    <p>You don't have any debt!</p>
-                    <button class="alertbtn" onclick="closeNilDebt()">Okay</button>
-                </div>
-
-                <div id="repayDebtAlert" class="alert">
-                    <h1>Error</h1>
-                    <p>You have reached your borrow limit!</p>
-                    <button clas="alertbtn" onclick="closeRepayDebt()">Okay</button>
-                </div>
-
-                <div id="startWork" class="alert">
-                    <h1>Error</h1>
-                    <p>Your company doesn't want to pay you anymore! Start trading to earn more moneyz!</p>
-                    <button class="alertbtn" onclick="closeWorkAlert()">Okay</button>
-                </div>
-
-                <div id="moreItem" class="alert">
-                    <h1>Error</h1>
-                    <p>You need more <span id="sellItem">item</span>!</p>
-                    <button class="alertbtn" onclick="closeItemAlert()">Okay</button>
-                </div>
-
-                <div id="secret" class="alert">
-                    <h1>DevMode</h1>
-                    <form action="javascript:void(0)" onsubmit="javascript:devMode()">
-                        Secret Phrase<br>
-                        <input type="text" id="secretPhrase"><br>
-                        <!-- <button onclick="closeSecret()">Cancel</button> -->
-                        <input type="submit" value="Enter">
-                    </form>
-                </div>
-
-                <div id="passError" class="alert">
-                    <h1>Error</h1>
-                    <p>Incorrect Passphrase</p>
-                    <button class="alertbtn" onclick="closePassError()">Okay</button>
-                </div>
-
-                <div id="devPanel" class="alert">
-                    <h1>Dev Features</h1>
-                    <br>
-                    <button onclick="closeDevMode()">Test 1</button>
-                    <button onclick="closeDevMode()">Test 2</button>
-                    <button onclick="closeDevMode()">Test 3</button>
-                    <br>
-                    <button onclick="closeDevMode()">Close Dev Features</button>
-                </div>
+                <button onclick="backToMenu()">Change Town</button>
             </div>
 
             <!-- Game Content -->
@@ -230,51 +235,89 @@
                     <h1>Flavourtown</h1>
 
                     <div id="item">
-                        <h2>Coffee</h2>
-                        <p>Amount: <span id="coffee">0</span></p>
-                        <p>Cost: <span id="coffee-cost" class="prices">10</span> updoots</p>
-                        <p>Happyz: <span id="coffee-happyz" class="happyz">7</span></p>
-                        <img src="images/coffee.png" alt="coffee"/>
-                        <br>
-                        <button onclick="buy('coffee');">Buy</button>
-                        <button onclick="sell('coffee');">Sell</button>
-                        <audio id="coffee-sound" src="audio/slurp.wav"></audio>
+                        <div id="item1">
+                            <h2>Coffee</h2>
+                            <p>Amount: <span id="coffee">0</span></p>
+                            <p>Cost: <span id="coffee-cost" class="prices">10</span> updoots</p>
+                            <p>Happyz: <span id="coffee-happyz" class="happyz">7</span></p>
+                            <img src="images/coffee.png" alt="coffee"/>
+                            <br>
+                            <button onclick="buy('coffee');">Buy</button>
+                            <button onclick="sell('coffee');">Sell</button>
+                            <audio id="coffee-sound" src="audio/slurp.wav"></audio>
+                        </div>
                     </div>
 
                     <div id="item">
-                        <h2>Pizza</h2>
-                        <p>Amount: <span id="pizza">0</span></p>
-                        <p>Cost: <span id="pizza-cost" class="prices">35</span> updoots</p>
-                        <p>Happyz: <span id="pizza-happyz" class="happyz">21</span></p>
-                        <img src="images/pizza.png" alt="pizza"/>
-                        <br>
-                        <button onclick="buy('pizza')">Buy</button>
-                        <button onclick="sell('pizza');">Sell</button>
-                        <audio id="pizza-sound" src="audio/pizza.mp3"></audio>
+                        <div id="pizza-content" class="item-content">
+                            <h2>Pizza</h2>
+                            <p>Amount: <span id="pizza">0</span></p>
+                            <p>Cost: <span id="pizza-cost" class="prices">35</span> updoots</p>
+                            <p>Happyz: <span id="pizza-happyz" class="happyz">21</span></p>
+                            <img src="images/pizza.png" alt="pizza"/>
+                            <br>
+                            <button onclick="buy('pizza')">Buy</button>
+                            <button onclick="sell('pizza');">Sell</button>
+                            <audio id="pizza-sound" src="audio/pizza.mp3"></audio>
+                        </div>
+                        <div id="unlock-pizza" class="unlock">
+                            <h2>Locked</h2>
+                            <p>Happyz to unlock: <span id="pizza-unlock-karma">150</span> karma</p>
+                            <p>Cost to unlock: <span id="pizza-unlock-cost">35</span> updoots</p>
+                            <p>Happyz earnt from unlock: <span id="pizza-unlock-happyz">21</span></p>
+                            <img src="images/lock.png" alt="locked"/>
+                            <br>
+                            <button onclick="unlock('pizza')">Unlock</button>
+                            <audio id="unlock-sound" src="audio/unlock.wav"></audio>
+                        </div>
                     </div>
 
                     <div id="item">
-                        <h2>Tea</h2>
-                        <p>Amount: <span id="tea">0</span></p>
-                        <p>Cost: <span id="tea-cost" class="prices">8</span> updoots</p>
-                        <p>Happyz: <span id="tea-happyz" class="happyz">6</span></p>
-                        <img src="images/tea.png" alt="tea"/>
-                        <br>
-                        <button onclick="buy('tea');">Buy</button>
-                        <button onclick="sell('tea');">Sell</button>
-                        <audio id="tea-sound" src="audio/slurp.wav"></audio>
+                        <div id="tea-content" class="item-content">
+                            <h2>Tea</h2>
+                            <p>Amount: <span id="tea">0</span></p>
+                            <p>Cost: <span id="tea-cost" class="prices">8</span> updoots</p>
+                            <p>Happyz: <span id="tea-happyz" class="happyz">6</span></p>
+                            <img src="images/tea.png" alt="tea"/>
+                            <br>
+                            <button onclick="buy('tea');">Buy</button>
+                            <button onclick="sell('tea');">Sell</button>
+                            <audio id="tea-sound" src="audio/slurp.wav"></audio>
+                        </div>
+                        <div id="unlock-tea" class="unlock">
+                            <h2>Locked</h2>
+                            <p>Happyz to unlock: <span id="tea-unlock-karma">175</span> karma</p>
+                            <p>Cost to unlock: <span id="tea-unlock-cost">8</span> updoots</p>
+                            <p>Happyz earnt from unlock: <span id="tea-unlock-happyz">6</span></p>
+                            <img src="images/lock.png" alt="locked"/>
+                            <br>
+                            <button onclick="unlock('tea')">Unlock</button>
+                            <audio id="unlock-sound" src="audio/unlock.wav"></audio>
+                        </div>
                     </div>
 
                     <div id="item">
-                        <h2>Burger</h2>
-                        <p>Amount: <span id="burger">0</span></p>
-                        <p>Cost: <span id="burger-cost" class="prices">30</span> updoots</p>
-                        <p>Happyz: <span id="burger-happyz" class="happyz">14</span></p>
-                        <img src="images/burger.png" alt="burger"/>
-                        <br>
-                        <button onclick="buy('burger')">Buy</button>
-                        <button onclick="sell('burger');">Sell</button>
-                        <audio id="burger-sound" src="audio/chezburgers.mp3"></audio>
+                        <div id="burger-content" class="item-content">
+                            <h2>Burger</h2>
+                            <p>Amount: <span id="burger">0</span></p>
+                            <p>Cost: <span id="burger-cost" class="prices">30</span> updoots</p>
+                            <p>Happyz: <span id="burger-happyz" class="happyz">14</span></p>
+                            <img src="images/burger.png" alt="burger"/>
+                            <br>
+                            <button onclick="buy('burger')">Buy</button>
+                            <button onclick="sell('burger');">Sell</button>
+                            <audio id="burger-sound" src="audio/chezburgers.mp3"></audio>
+                        </div>
+                        <div id="unlock-burger" class="unlock">
+                            <h2>Locked</h2>
+                            <p>Happyz to unlock: <span id="burger-unlock-karma">225</span> karma</p>
+                            <p>Cost to unlock: <span id="burger-unlock-cost">30</span> updoots</p>
+                            <p>Happyz earnt from unlock: <span id="burger-unlock-happyz">14</span></p>
+                            <img src="images/lock.png" alt="locked"/>
+                            <br>
+                            <button onclick="unlock('burger')">Unlock</button>
+                            <audio id="unlock-sound" src="audio/unlock.wav"></audio>
+                        </div>
                     </div>
                 </div>
 
@@ -293,7 +336,7 @@
                             <br>
                             <button onclick="buy('spoderman')">Buy</button>
                             <button onclick="sell('spoderman');">Sell</button>
-                            <audio id="spoder-sound" src="audio/spoderman.mp3"></audio>
+                            <audio id="spoderman-sound" src="audio/spoderman.mp3"></audio>
                         </div>
                         
                         <div id="item">

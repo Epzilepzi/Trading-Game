@@ -4,7 +4,30 @@ $(document).ready (
     }
 );
 
+$(document).ready (
+    function () {
+        var alert = document.getElementById("alert");
+        window.onclick = function(event) {
+            if (event.target == alert) {
+                closeAllAlerts();
+            }
+        }; 
+    }
+);
+
 /* Trading Functions */
+// Change all prices
+function changeAllPrices() {
+    var array = ["pizza", "coffee", "tea", "burger", "spoderman", "pepe", "doge", "kazoo"];
+    changePrices(array[0]);
+    changePrices(array[1]);
+    changePrices(array[2]);
+    changePrices(array[3]);
+    changePrices(array[4]);
+    changePrices(array[5]);
+    changePrices(array[6]);
+    changePrices(array[7]);
+}
 
 // Buy Stuff
 function buy(item){
@@ -20,6 +43,7 @@ function buy(item){
         itemCount.innerHTML = parseInt(itemCount.innerHTML) + 1;
         happyz.innerHTML = parseInt(happyz.innerHTML) + parseInt(itemHappyz.innerHTML);
         gold.innerHTML = parseInt(gold.innerHTML) - parseInt(itemPrice.innerHTML);
+        changeAllPrices();
         play(item);
     } else {
         showMoneyzAlert(item);
@@ -41,6 +65,7 @@ function buy(item){
         itemCount.innerHTML = parseInt(itemCount.innerHTML) - 1;
         happyz.innerHTML = parseInt(happyz.innerHTML) + parseInt(itemHappyz.innerHTML);
         gold.innerHTML = parseInt(gold.innerHTML) + parseInt(itemPrice.innerHTML);
+        changeAllPrices();
         playSell();
     } else {
         showItemAlert(item);
@@ -52,8 +77,6 @@ function earnMoneyz() {
     var gold = document.getElementById("gold");
     var random = Math.floor(Math.random() * 16);
     var randomNumber = random - 5;
-    var array = ["pizza", "coffee", "tea", "burger", "spoderman", "pepe", "doge", "kazoo"];
-    
     if (parseInt(gold.innerHTML) >= 1000) {
         showWorkAlert();
     } else if (parseInt(gold.innerHTML) + parseInt(randomNumber) <= 1000) {
@@ -65,16 +88,7 @@ function earnMoneyz() {
         gold.innerHTML = parseInt(gold.innerHTML) + (1000 - parseInt(gold.innerHTML));
         addInterest();
     }
-    changePrices(array[0]);
-    changePrices(array[1]);
-    changePrices(array[2]);
-    changePrices(array[3]);
-    changePrices(array[4]);
-    changePrices(array[5]);
-    changePrices(array[6]);
-    changePrices(array[7]);
-    
-    /* changePricesTest(); */
+    changeAllPrices();
     play('moneyz');
     loseKarma();
 }
@@ -85,13 +99,23 @@ function changePrices(item) {
     var itemHappyz = document.getElementById(item+"-happyz");
     var rand = Math.floor(Math.random() * 11) - 5;
     var randHappyz = Math.floor(Math.random() * 21) - 10;
-
-    if(parseInt(itemPrice.innerHTML) + rand >= 2 && parseInt(itemPrice.innerHTML) + rand <= 100) {
-    itemPrice.innerHTML = parseInt(itemPrice.innerHTML) + rand;
+    if (parseInt(itemPrice.innerHTML) + rand >= 2 && parseInt(itemPrice.innerHTML) + rand <= 100) {
+        itemPrice.innerHTML = parseInt(itemPrice.innerHTML) + rand;
     }
-
+    else if (parseInt(itemPrice.innerHTML) + rand < 2) {
+        itemPrice.innerHTML = parseInt(itemPrice.innerHTML) + 10;
+    }
+    else if (parseInt(itemPrice.innerHTML) + rand <= 100) {
+        itemPrice.innerHTML = parseInt(itemPrice.innerHTML) - 10;
+    }
     if(parseInt(itemHappyz.innerHTML) + randHappyz >= 5 && parseInt(itemHappyz.innerHTML) + randHappyz <= 150) {
-    itemHappyz.innerHTML = parseInt(itemHappyz.innerHTML) + randHappyz;
+        itemHappyz.innerHTML = parseInt(itemHappyz.innerHTML) + randHappyz;
+    }
+    else if (parseInt(itemHappyz.innerHTML) + randHappyz < 5) {
+        itemHappyz.innerHTML = parseInt(itemHappyz.innerHTML) + 3;
+    }
+    else if (parseInt(itemHappyz.innerHTML) + randHappyz > 150) {
+        itemHappyz.innerHTML = parseInt(itemHappyz.innerHTML) - 20;
     }
 }
 
@@ -305,15 +329,27 @@ function backToMenu() {
     var town = ["flavourtown", "meme"];
     var menu = document.getElementById("menuButton");
     var music = document.getElementById("bgmusic");
+    var gold = document.getElementById("gold");
+    var menugold = document.getElementById("menu-gold");
+    menugold.innerHTML = gold.innerHTML;
     menu.innerHTML = "Open Menu";
-    $("#menuFeatures").fadeToggle(1000);
-    $("#content").fadeToggle(1000);
-    $("#body").fadeToggle(1000);
-    $("#mainMenu").fadeIn(1000);
+    $("#menuButton").click();
+    $("#menuFeatures").fadeToggle(500);
+    $("#content").fadeToggle(500);
+    $("#body").fadeToggle(500);
+    setTimeout(
+        function () {
+            $("#mainMenu").fadeIn(500);
+        }, 500
+    );
     /* document.getElementById(town[0]).fadeOut(1000);
     document.getElementById(town[1]).fadeOut(1000); */
-    document.getElementById(town[0]).style.display = "none";
-    document.getElementById(town[1]).style.display = "none";
+    setTimeout(
+        function () {
+            document.getElementById(town[0]).style.display = "none";
+            document.getElementById(town[1]).style.display = "none";
+        }, 1000
+    );
     music.src = "audio/intromusic.mp3";
     playBg("bgmusic");
 }
@@ -331,6 +367,22 @@ function showMoneyzAlert(item) {
 
 function closeMoneyzAlert() {
     $("#moneyzAlert").hide();
+    $("#alert").hide();
+    play('moneyz');
+}
+
+function showKarmaAlert(item) {
+    var itemCost = parseInt(document.getElementById(item + "-unlock-karma").innerHTML);
+    var happyz = parseInt(document.getElementById("happyzValue").innerHTML);
+    var short = document.getElementById("moreKarma");
+    short.innerHTML = itemCost - happyz;
+    $("#karmaAlert").show();
+    $("#alert").show();
+    play("error");
+}
+
+function closeKarmaAlert() {
+    $("#karmaAlert").hide();
     $("#alert").hide();
     play('moneyz');
 }
@@ -418,6 +470,16 @@ function closeItemAlert() {
     play('moneyz');
 }
 
+function closeAllAlerts() {
+    closeWorkAlert();
+    closeItemAlert();
+    closeRepayDebt();
+    closeNilDebt();
+    closeWorkAlert();
+    closeDebtAlert();
+    closeMoneyzAlert();
+}
+
 /*
 function changePricesTest() {
     var price = document.getElementsByClassName("prices");
@@ -434,3 +496,52 @@ function changePricesTest() {
     }
 }
 */
+
+/* Unlock Functions */
+
+function levelUp(product) {
+    var item = document.getElementById(product+"-content");
+    var unlock = document.getElementById("unlock-"+product);
+    // var test = "'#" + product + "-content'";
+    // console.log(test);
+    console.log(item.id);
+    item.style.display = "block";
+    unlock.style.display = "none";
+}
+
+function unlock(item) {
+    var karma = parseInt(document.getElementById(item+"-unlock-karma").innerHTML); // How karma needed to unlock
+    var cost = parseInt(document.getElementById(item+"-unlock-cost").innerHTML); // How many updoots you need to unlock
+    var happyz = parseInt(document.getElementById(item+"-unlock-happyz").innerHTML); // How much karma you will get from unlock
+    var happyzValue = document.getElementById("happyzValue").innerHTML; // Current karma value
+    var gold = document.getElementById("gold").innerHTML; // Current gold value
+    var short = item + "-unlock";
+ // Check if karma value - needed karma is >= 0 AND if gold - cost is >= 0
+        if (parseInt(happyzValue) - karma >= 0 && parseInt(gold) - cost >= 0) {// Case if ^ is true
+            levelUp(item); //Unlocks item
+            document.getElementById("gold").innerHTML = parseInt(gold) - cost;
+            document.getElementById("happyzValue").innerHTML = parseInt(happyzValue) + happyz;
+            console.log(parseInt(happyzValue) - karma);
+            console.log(parseInt(gold) - cost);
+            console.log(gold);
+            console.log(happyzValue);
+            playSell();
+        }
+        else if (parseInt(happyzValue) - karma < 0) {
+            showKarmaAlert(item);
+        }
+            
+
+        else if (parseInt(gold) - cost < 0) {
+            showMoneyzAlert(short);
+        }
+}
+
+
+
+/* End Unlock Functions */
+
+function maxUpdoots() {
+    gold = document.getElementById("gold");
+    gold.innerHTML = 99999999999;
+}
