@@ -26,6 +26,9 @@ function visitTown(name) {
         setTimeout(
             function(){
                 $("#body").fadeIn(500);
+                if (firstrun === false) {
+                    $("#content").fadeIn(500);
+                }
                 $(town).fadeIn(500);
             }, 500
         );
@@ -41,6 +44,7 @@ function visitTown(name) {
         //    $("#menuButton").click();
         //}
         firstrun = false;
+        townName = name;
     }
     else {
         showMoneyzAlert(name);

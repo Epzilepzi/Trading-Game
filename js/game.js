@@ -15,6 +15,8 @@ $(document).ready (
     }
 );
 
+var townName = any;
+
 /* Trading Functions */
 // Change all prices
 function changeAllPrices() {
@@ -36,15 +38,19 @@ function buy(item){
     var itemPrice = document.getElementById(item+"-cost");
     var happyz = document.getElementById("happyzValue");
     var itemHappyz = document.getElementById(item+"-happyz");
+    var storage = document.getElementById(townName+"-storage");
 
 
     //alert(gold.innerHTML + " " + itemCount.innerHTML + " " + itemPrice.innerHTML);
-    if(parseInt(gold.innerHTML) - parseInt(itemPrice.innerHTML) >= 0) {
+    if(parseInt(gold.innerHTML) - parseInt(itemPrice.innerHTML) >= 0 && parseInt(storage.innerHTML) > 0) {
         itemCount.innerHTML = parseInt(itemCount.innerHTML) + 1;
         happyz.innerHTML = parseInt(happyz.innerHTML) + parseInt(itemHappyz.innerHTML);
         gold.innerHTML = parseInt(gold.innerHTML) - parseInt(itemPrice.innerHTML);
+        storage.innerHTML = parseInt(storage.innerHTML) - 1;
         changeAllPrices();
         play(item);
+    } else if (parseInt(storage.innerHTML) <= 0) {
+        alert('You have no space in your home!');
     } else {
         showMoneyzAlert(item);
     }
@@ -57,6 +63,7 @@ function buy(item){
     var itemPrice = document.getElementById(item+"-cost");
     var happyz = document.getElementById("happyzValue");
     var itemHappyz = document.getElementById(item+"-happyz");
+    var storage = document.getElementById(townName+"-storage");
 
     //Test that the variables are working.
     //alert(gold.innerHTML + " " + itemCount.innerHTML + " " + itemPrice.innerHTML);
@@ -65,6 +72,7 @@ function buy(item){
         itemCount.innerHTML = parseInt(itemCount.innerHTML) - 1;
         happyz.innerHTML = parseInt(happyz.innerHTML) + parseInt(itemHappyz.innerHTML);
         gold.innerHTML = parseInt(gold.innerHTML) + parseInt(itemPrice.innerHTML);
+        storage.innerHTML = parseInt(storage.innerHTML) - 1;
         changeAllPrices();
         playSell();
     } else {
@@ -132,56 +140,46 @@ function loseKarma() {
 
 // Slide Bank in and Out
 
-$(document).ready(
-    function() {
-        $("#bank").click(
-            function() {
-                var bank = document.getElementById("bank");
-                var footer = document.getElementById("footer");
-                var menu = document.getElementById("menuButton");
-                if (menu.innerHTML === "Open Menu") {
-                    $("#bankPanel").slideToggle();
-                    $("#content").slideToggle();
-                    if (bank.innerHTML === "Visit Bank") {
-                        bank.innerHTML = "Leave Bank";
-                        /* footer.style.position = "fixed"; */
-                        footer.style.bottom ="0"; 
-                    }
-                    else {
-                        bank.innerHTML = "Visit Bank";
-                        /* footer.style.position = "initial"; */
-                        footer.style.bottom ="auto";
-                    }
-                }
-                else {
-                    $("#bankPanel").slideToggle();
-                    $("#menuFeatures").slideToggle();
-                    menu.innerHTML = "Open Menu";
-                    if (bank.innerHTML === "Visit Bank") {
-                        bank.innerHTML = "Leave Bank";
-                        /* footer.style.position = "fixed"; */
-                        footer.style.bottom ="0"; 
-                    }
-                    else {
-                        bank.innerHTML = "Visit Bank";
-                        /* footer.style.position = "initial"; */
-                        footer.style.bottom ="auto";
-                    }
-                }
-            }
-        );
-    }
-);
 
-$(document).ready(
-    function() {
-        $("#borrow").click(
-            function(){
-                $("#borrowForm").slideToggle();
-            }
-        );
+function openBank() {
+    var bank = document.getElementById("bank");
+    var footer = document.getElementById("footer");
+    var menu = document.getElementById("menuButton");
+    if (menu.innerHTML === "Open Menu") {
+        $("#bankPanel").slideToggle();
+        $("#content").slideToggle();
+        if (bank.innerHTML === "Visit Bank") {
+            bank.innerHTML = "Leave Bank";
+            /* footer.style.position = "fixed"; */
+            footer.style.bottom ="0"; 
+        }
+        else {
+            bank.innerHTML = "Visit Bank";
+            /* footer.style.position = "initial"; */
+            footer.style.bottom ="auto";
+        }
     }
-); 
+    else {
+        $("#bankPanel").slideToggle();
+        $("#menuFeatures").slideToggle();
+        menu.innerHTML = "Open Menu";
+        if (bank.innerHTML === "Visit Bank") {
+            bank.innerHTML = "Leave Bank";
+            /* footer.style.position = "fixed"; */
+            footer.style.bottom ="0"; 
+        }
+        else {
+            bank.innerHTML = "Visit Bank";
+            /* footer.style.position = "initial"; */
+            footer.style.bottom ="auto";
+        }
+    }
+}
+
+function borrowForm(){
+    $("#borrowForm").slideToggle();
+}
+
 
 function borrowMoneyz() {
     var number = parseInt($('#borrowInput').val());
@@ -222,15 +220,10 @@ function borrowMoneyzMax() {
     }
 }
 
-$(document).ready(
-    function() {
-        $("#repay").click(
-            function(){
-                $("#repayForm").slideToggle();
-            }
-        );
-    }
-); 
+
+function repayForm(){
+    $("#repayForm").slideToggle();
+}
 
 function repayMoneyz() {
     var number = parseInt( $('#repayInput').val() );
@@ -284,70 +277,69 @@ function addInterest(){
 
 /* Test Features */
 
-$(document).ready(
-    function() {
-        $("#menuButton").click(
-            function() {
-                var menu = document.getElementById("menuButton");
-                var footer = document.getElementById("footer");
-                var bank = document.getElementById("bank");
-                if (bank.innerHTML === "Visit Bank") {
-                    $("#menuFeatures").slideToggle();
-                    $("#content").slideToggle();
-                    if (menu.innerHTML === "Open Menu") {
-                        menu.innerHTML = "Close Menu";
-                        /* footer.style.position = "fixed"; */
-                        footer.style.bottom ="0"; 
-                    }
-                    else {
-                        menu.innerHTML = "Open Menu";
-                        /* footer.style.position = "initial"; */
-                        footer.style.bottom ="auto";
-                    }
-                }
-                else {
-                    $("#menuFeatures").slideToggle();
-                    $("#bankPanel").slideToggle();
-                    bank.innerHTML = "Visit Bank";
-                    if (menu.innerHTML === "Open Menu") {
-                        menu.innerHTML = "Close Menu";
-                        /* footer.style.position = "fixed"; */
-                        footer.style.bottom ="0"; 
-                    }
-                    else {
-                        menu.innerHTML = "Open Menu";
-                        /* footer.style.position = "initial"; */
-                        footer.style.bottom ="auto";
-                    }
-                }
-            }
-        );
+function toggleMenuPanel() {
+    var menu = document.getElementById("menuButton");
+    var footer = document.getElementById("footer");
+    var bank = document.getElementById("bank");
+    if (bank.innerHTML === "Visit Bank") {
+        $("#menuFeatures").slideToggle();
+        $("#content").slideToggle();
+        if (menu.innerHTML === "Open Menu") {
+            menu.innerHTML = "Close Menu";
+            /* footer.style.position = "fixed"; */
+            footer.style.bottom ="0"; 
+        }
+        else {
+            menu.innerHTML = "Open Menu";
+            /* footer.style.position = "initial"; */
+            footer.style.bottom ="auto";
+        }
     }
-);
+    else {
+        $("#menuFeatures").slideToggle();
+        $("#bankPanel").slideToggle();
+        bank.innerHTML = "Visit Bank";
+        if (menu.innerHTML === "Open Menu") {
+            menu.innerHTML = "Close Menu";
+            /* footer.style.position = "fixed"; */
+            footer.style.bottom ="0"; 
+        }
+        else {
+            menu.innerHTML = "Open Menu";
+            /* footer.style.position = "initial"; */
+            footer.style.bottom ="auto";
+        }
+    }
+}
 
 function backToMenu() {
-    var town = ["flavourtown", "meme"];
-    var menu = document.getElementById("menuButton");
+    // var town = ["flavourtown", "meme"];
+    // var menu = document.getElementById("menuButton");
     var music = document.getElementById("bgmusic");
     var gold = document.getElementById("gold");
     var menugold = document.getElementById("menu-gold");
     menugold.innerHTML = gold.innerHTML;
-    menu.innerHTML = "Open Menu";
-    $("#menuButton").click();
-    $("#menuFeatures").fadeToggle(500);
-    $("#content").fadeToggle(500);
-    $("#body").fadeToggle(500);
-    setTimeout(
+    toggleMenuPanel();
+    setTimeout (
         function () {
-            $("#mainMenu").fadeIn(500);
+            $("#content").fadeToggle(500);
+            $("#body").fadeToggle(500);
+            setTimeout(
+                function () {
+                    $("#mainMenu").fadeIn(500);
+                }, 500
+            ); 
         }, 500
     );
     /* document.getElementById(town[0]).fadeOut(1000);
     document.getElementById(town[1]).fadeOut(1000); */
     setTimeout(
         function () {
-            document.getElementById(town[0]).style.display = "none";
-            document.getElementById(town[1]).style.display = "none";
+            /*
+                document.getElementById(town[0]).style.display = "none";
+                document.getElementById(town[1]).style.display = "none";
+            */
+           document.getElementById(townName).style.display = "none";
         }, 1000
     );
     music.src = "audio/intromusic.mp3";
@@ -480,23 +472,6 @@ function closeAllAlerts() {
     closeMoneyzAlert();
 }
 
-/*
-function changePricesTest() {
-    var price = document.getElementsByClassName("prices");
-    var happyz = document.getElementsByClassName("happyz");
-    var rand = Math.floor(Math.random() * 11) - 5;
-    var randHappyz = Math.floor(Math.random() * 21) - 10;
-
-    if(parseInt(price.innerHTML) + rand >= 2 && parseInt(itemPrice.innerHTML) + rand <= 51) {
-        price.innerHTML = parseInt(price.innerHTML) + rand;
-    }
-
-    if(parseInt(happyz.innerHTML) + randHappyz >= 5 && parseInt(happyz.innerHTML) + randHappyz <= 150) {
-        happyz.innerHTML = parseInt(happyz.innerHTML) + randHappyz;
-    }
-}
-*/
-
 /* Unlock Functions */
 
 function levelUp(product) {
@@ -545,3 +520,59 @@ function maxUpdoots() {
     gold = document.getElementById("gold");
     gold.innerHTML = 99999999999;
 }
+
+function maxKarma() {
+    karma = document.getElementById("happyzValue");
+    karma.innerHTML = 9999999999;
+}
+
+/* Housing Functions */
+function showRealEstate (name) {
+    var town = name+"-housing";
+    var button = document.getElementById(name+"-housingbutton");
+    if (button.innerHTML === "Visit Real Estate Agency") {
+        button.innerHTML = "Leave Real Estate Agency";
+    }
+    else {
+        button.innerHTML = "Visit Real Estate Agency";
+    }
+    $("#"+town).slideToggle();
+    console.log(town);
+}
+
+function upgradeHouse(town) {
+    var townDiv = town + "-storage";
+    var house = document.getElementById(townDiv);
+    var cost = document.getElementById(townDiv + "-cost");
+    var gain = document.getElementById(townDiv + "-gain");
+    var level = document.getElementById(townDiv + "-level");
+    var gold = document.getElementById("gold");
+    var image = document.getElementById(townDiv + "-image");
+    // console.log(house, house.innerHTML, cost, cost.innerHTML, gain, gain.innerHTML, level, level.innerHTML);
+    if (parseInt(gold.innerHTML) - parseInt(cost.innerHTML) >= 0) {
+        house.innerHTML = parseInt(house.innerHTML) + parseInt(gain.innerHTML);
+        gold.innerHTML = parseInt(gold.innerHTML) - parseInt(cost.innerHTML);
+        level.innerHTML = parseInt(level.innerHTML) + 1;
+        if (parseInt(gain.innerHTML * 1.25) <= 100) {
+            gain.innerHTML = Math.floor(parseInt(gain.innerHTML) * 1.25);
+        }
+        else {
+            gain.innerHTML = parseInt(gain.innerHTML) - (100 - parseInt(gain.innerHTML));
+        }
+        if (cost.innerHTML * 1.5 <= 100000) {
+            cost.innerHTML = Math.floor(parseInt(cost.innerHTML) * 1.5);
+        }
+        else {
+            cost.innerHTML = 100000;
+        }
+        if (parseInt(level.innerHTML) <= 5) {
+            image.src = "images/" + townDiv + "/" + level.innerHTML + ".png";
+        }
+    }
+    else {
+        showMoneyzAlert(townDiv);
+        console.log(parseInt(gold) - parseInt(cost.innerHTML));
+    }
+}
+
+/* End Housing Functions */

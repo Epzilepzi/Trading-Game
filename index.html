@@ -98,12 +98,11 @@
             </div>
 
             <div id="devPanel" class="alert">
-                <h1>Dev Features</h1>
+                <h1>Dev Menu</h1>
                 <br>
-                <button onclick="closeDevMode();showDebtAlert()">Debt Test</button>
                 <button onclick="maxUpdoots()">Give Updoots</button>
-                <button onclick="closeDevMode()">Test 3</button>
-                <button onclick="closeDevMode()">Close Dev Features</button>
+                <button onclick="maxKarma()">Give Karma</button>
+                <button onclick="closeDevMode()">Close Dev Menu</button>
             </div>
         </div>
         <div id="intro" class="titleScreen">
@@ -141,8 +140,8 @@
                 <br>
             </div>
 
-            <div id="footer">
-                <button id="muteButton" onclick="toggleMute()">Toggle Music</button>
+            <div id="footer" style="margin:0px;padding:0px;">
+                <button id="muteButton" onclick="toggleMute()" style="margin:0px;">Toggle Music</button>
             </div>
         </div>
 
@@ -163,7 +162,7 @@
             
                 <div id="earn">
                     <div id="earnLeft">
-                        <button id="bank" class="navbarButtons">Visit Bank</button>
+                        <button id="bank" class="navbarButtons" onclick="openBank()">Visit Bank</button>
                     </div>
 
                     <div id="earnCenter">
@@ -171,7 +170,7 @@
                     </div>
 
                     <div id="earnRight">
-                        <button id="menuButton">Open Menu</button>
+                        <button id="menuButton" onclick="toggleMenuPanel()">Open Menu</button>
                     </div>
                     <audio id="moneyz-sound" src="audio/volume.mp3" hidden="true"></audio>
                 </div>
@@ -181,7 +180,7 @@
             <div id="bankPanel">
                 <h1>MonoBank</h1>
                 <div id="borrowButton">
-                    <button id="borrow">Borrow Money</button>
+                    <button id="borrow" onclick="borrowForm()">Borrow Money</button>
                     <div id="borrowForm">
                         <form action="javascript:void(0);" onsubmit="borrowMoneyz()">
                                 Enter amount to borrow:<br>
@@ -203,7 +202,7 @@
                 </div>
 
                 <div id="repayButton">
-                    <button id="repay">Repay Debt</button>
+                    <button id="repay" onclick="repayForm()">Repay Debt</button>
                     <div id="repayForm">
                         <form action="javascript:void(0);" onsubmit="repayMoneyz()">
                                 Enter amount to repay:<br>
@@ -233,6 +232,23 @@
                     <audio id="sellSound" src="audio/sell.wav" hidden="true"></audio>
 
                     <h1>Flavourtown</h1>
+
+                    <div style="text-align:center;margin-bottom:0px;">
+                        <button id="flavourtown-housingbutton" onclick="showRealEstate('flavourtown')">Visit Real Estate Agency</button>
+                    </div>
+
+                    <div id="flavourtown-housing" class="housing">
+                        <div id="house">
+                            <h2>Flavour House</h2>
+                            <p>House Level: <span id="flavourtown-storage-level">1</span></p>
+                            <p>Storage available: <span id="flavourtown-storage">10</span> items</p>
+                            <p>Upgrade cost: <span id="flavourtown-storage-cost">400</span> updoots</p>
+                            <p>Add more storage: <span id="flavourtown-storage-gain">5</span> items</p>
+                            <img src="images/monobank.png" alt="house" id="flavourtown-storage-image">
+                            <br>
+                            <button onclick="upgradeHouse('flavourtown')">Upgrade</button>
+                        </div>
+                    </div>
 
                     <div id="item">
                         <div id="item1">
@@ -328,27 +344,41 @@
                         <h1>Meme Valley</h1>
     
                         <div id="item">
-                            <h2>Spoderman</h2>
-                            <p>Amount: <span id="spoderman">0</span></p>
-                            <p>Cost: <span id="spoderman-cost" class="prices">39</span> updoots</p>
-                            <p>Happyz: <span id="spoderman-happyz" class="happyz">20</span></p>
-                            <img src="images/spoder.jpg" alt="spoderman"/>
-                            <br>
-                            <button onclick="buy('spoderman')">Buy</button>
-                            <button onclick="sell('spoderman');">Sell</button>
-                            <audio id="spoderman-sound" src="audio/spoderman.mp3"></audio>
+                            <div id="item1">
+                                <h2>Spoderman</h2>
+                                <p>Amount: <span id="spoderman">0</span></p>
+                                <p>Cost: <span id="spoderman-cost" class="prices">39</span> updoots</p>
+                                <p>Happyz: <span id="spoderman-happyz" class="happyz">20</span></p>
+                                <img src="images/spoder.jpg" alt="spoderman"/>
+                                <br>
+                                <button onclick="buy('spoderman')">Buy</button>
+                                <button onclick="sell('spoderman');">Sell</button>
+                                <audio id="spoderman-sound" src="audio/spoderman.mp3"></audio>
+                            </div>
                         </div>
                         
                         <div id="item">
-                            <h2>Pepe</h2>
-                            <p>Amount: <span id="pepe">0</span></p>
-                            <p>Cost: <span id="pepe-cost" class="prices">69</span> updoots</p>
-                            <p>Happyz: <span id="pepe-happyz" class="happyz">69</span></p>
-                            <img src="images/pepe.jpg" alt="pepe"/>
-                            <br>
-                            <button onclick="buy('pepe')">Buy</button>
-                            <button onclick="sell('pepe');">Sell</button>
-                            <audio id="pepe-sound" src="audio/pepe.mp3"></audio>
+                            <div id="pepe-content" class="item-content">
+                                <h2>Pepe</h2>
+                                <p>Amount: <span id="pepe">0</span></p>
+                                <p>Cost: <span id="pepe-cost" class="prices">69</span> updoots</p>
+                                <p>Happyz: <span id="pepe-happyz" class="happyz">69</span></p>
+                                <img src="images/pepe.jpg" alt="pepe"/>
+                                <br>
+                                <button onclick="buy('pepe')">Buy</button>
+                                <button onclick="sell('pepe');">Sell</button>
+                                <audio id="pepe-sound" src="audio/pepe.mp3"></audio>
+                            </div>
+                            <div id="unlock-pepe" class="unlock">
+                                <h2>Locked</h2>
+                                <p>Happyz to unlock: <span id="pepe-unlock-karma">9000</span> karma</p>
+                                <p>Cost to unlock: <span id="pepe-unlock-cost">69</span> updoots</p>
+                                <p>Happyz earnt from unlock: <span id="pepe-unlock-happyz">69</span></p>
+                                <img src="images/lock.png" alt="locked"/>
+                                <br>
+                                <button onclick="unlock('pepe')">Unlock</button>
+                                <audio id="unlock-sound" src="audio/unlock.wav"></audio>
+                            </div>
                         </div>
                             
                         <div id="item">
@@ -387,7 +417,7 @@
                 </div>
                 
                 <div id="footerButtons">
-                <button class="redbtn" onclick="showDevMode();">Dev Features</button>
+                <button class="redbtn" onclick="showDevMode();">Dev Menu</button>
                 </div>
             <!-- End footer stuff -->
         </div>

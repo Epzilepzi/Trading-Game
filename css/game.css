@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
-@-ms-viewport{
-    width: device-width;
-}
-
 /* General CSS */
 html, body {
     font-family: Arial, Helvetica, sans-serif;
@@ -66,6 +62,7 @@ button:ACTIVE {
 
 /* Title Screen */
 
+/* Reference: https://www.w3schools.com/howto/howto_css_overlay.asp */
 #intro {
     position: fixed; /* Sit on top of the page content */
     display: block; /* Hidden by default */
@@ -146,13 +143,6 @@ button:ACTIVE {
     background-color: red;
 }
 
-#mainMenu #footer {
-    bottom: 0;
-    position: fixed;
-    padding-top: 0px;
-    left: 0;
-}
-
 #mainMenu #item img {
     max-width: 40%;
 }
@@ -178,30 +168,6 @@ button:ACTIVE {
 button.small {
     font-size: 18px;
 }
-
-/* Redundant Functions */
-/* The sticky class is added to the navbar with JS when it reaches its scroll position */
-.sticky {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-/*
-// Page content 
-.content {
-  padding: 16px;
-}
-
-
-// Add some top padding to the page content to prevent sudden quick movement 
-// (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) 
-
-
-.sticky + .content {
-padding-top: 180px;
-}
-*/
 
 /* End Sticky Topbar */
 
@@ -482,6 +448,20 @@ padding-top: 180px;
     margin-top: 0px;
 }
 
+#house {
+    width: 45%;
+    text-align: center;
+    margin: auto;
+    background-color: red;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    padding: 5px;
+}
+
+#house img {
+    max-width: 40%;
+}
+
 .item-content {
     display: none;
     animation: fadeIn .5s ease-in 1 forwards;
@@ -718,6 +698,12 @@ padding-top: 180px;
     box-shadow: 2px 5px 2px #999;
     margin-bottom: 15px;
     margin-top: 15px;
+}
+
+#flavourtown-housing {
+    text-align: center;
+    display: none;
+    overflow: auto;
 }
 /* Broken Close Button 
 .closebtn {
