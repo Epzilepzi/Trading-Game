@@ -8,7 +8,7 @@ $(document).ready (
     function () {
         var alert = document.getElementById("alert");
         window.onclick = function(event) {
-            if (event.target == alert) {
+            if (event.target === alert) {
                 closeAllAlerts();
             }
         }; 
@@ -50,7 +50,7 @@ function buy(item){
         changeAllPrices();
         play(item);
     } else if (parseInt(storage.innerHTML) <= 0) {
-        alert('You have no space in your home!');
+        showMoreHouse();
     } else {
         showMoneyzAlert(item);
     }
@@ -459,6 +459,44 @@ function showItemAlert(item) {
 function closeItemAlert() {
     $("#moreItem").hide();
     $("#alert").hide();
+    play("moneyz");
+}
+
+function showMoreHouse() {
+    $("#moreHouse").show();
+    $("#alert").show();
+    play("error");
+}
+
+function closeMoreHouse() {
+    $("#moreHouse").hide();
+    $("#alert").hide();
+    play('moneyz');
+}
+
+function showMaxHouse() {
+    $("#maxHouse").show();
+    $("#alert").show();
+    play("error");
+}
+
+function closeMaxHouse() {
+    $("#maxHouse").hide();
+    $("#alert").hide();
+    play('moneyz');
+}
+
+function showCongratulateHouse(town) {
+    document.getElementById("townName").innerHTML = town;
+    $("#congratulateHouse").show();
+    $("#alert").show();
+    play("xp");
+}
+
+function closeCongratulateHouse() {
+    document.getElementById("congratulateHouse").style.display = "none";
+    $("#congratulateHouse").hide();
+    $("#alert").hide();
     play('moneyz');
 }
 
@@ -470,6 +508,10 @@ function closeAllAlerts() {
     closeWorkAlert();
     closeDebtAlert();
     closeMoneyzAlert();
+    closeCongratulateHouse();
+    closeDevMode();
+    closeMaxHouse();
+    closeMoreHouse();
 }
 
 /* Unlock Functions */
@@ -549,29 +591,37 @@ function upgradeHouse(town) {
     var gold = document.getElementById("gold");
     var image = document.getElementById(townDiv + "-image");
     // console.log(house, house.innerHTML, cost, cost.innerHTML, gain, gain.innerHTML, level, level.innerHTML);
-    if (parseInt(gold.innerHTML) - parseInt(cost.innerHTML) >= 0) {
-        house.innerHTML = parseInt(house.innerHTML) + parseInt(gain.innerHTML);
-        gold.innerHTML = parseInt(gold.innerHTML) - parseInt(cost.innerHTML);
-        level.innerHTML = parseInt(level.innerHTML) + 1;
-        if (parseInt(gain.innerHTML * 1.25) <= 100) {
-            gain.innerHTML = Math.floor(parseInt(gain.innerHTML) * 1.25);
+    if (parseInt(level.innerHTML) <= 99) {
+        if (parseInt(gold.innerHTML) - parseInt(cost.innerHTML) >= 0) {
+            house.innerHTML = parseInt(house.innerHTML) + parseInt(gain.innerHTML);
+            gold.innerHTML = parseInt(gold.innerHTML) - parseInt(cost.innerHTML);
+            level.innerHTML = parseInt(level.innerHTML) + 1;
+            if (parseInt(gain.innerHTML * 1.25) <= 100) {
+                gain.innerHTML = Math.floor(parseInt(gain.innerHTML) * 1.25);
+            }
+            else {
+                gain.innerHTML = parseInt(gain.innerHTML) - (100 - parseInt(gain.innerHTML));
+            }
+            if (cost.innerHTML * 1.5 <= 100000) {
+                cost.innerHTML = Math.floor(parseInt(cost.innerHTML) * 1.5);
+            }
+            else {
+                cost.innerHTML = 100000;
+            }
+            if (parseInt(level.innerHTML) <= 5) {
+                image.src = "images/" + townDiv + "/" + level.innerHTML + ".png";
+            }
+            if (parseInt(level.innerHTML) === 100) {
+                showCongratulateHouse(town);
+            }
         }
         else {
-            gain.innerHTML = parseInt(gain.innerHTML) - (100 - parseInt(gain.innerHTML));
-        }
-        if (cost.innerHTML * 1.5 <= 100000) {
-            cost.innerHTML = Math.floor(parseInt(cost.innerHTML) * 1.5);
-        }
-        else {
-            cost.innerHTML = 100000;
-        }
-        if (parseInt(level.innerHTML) <= 5) {
-            image.src = "images/" + townDiv + "/" + level.innerHTML + ".png";
+            showMoneyzAlert(townDiv);
+            console.log(parseInt(gold) - parseInt(cost.innerHTML));
         }
     }
-    else {
-        showMoneyzAlert(townDiv);
-        console.log(parseInt(gold) - parseInt(cost.innerHTML));
+    else if (parseInt(level.innerHTML) >= 100) {
+        showMaxHouse();
     }
 }
 

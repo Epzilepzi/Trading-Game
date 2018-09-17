@@ -66,7 +66,7 @@
             <div id="repayDebtAlert" class="alert">
                 <h1>Error</h1>
                 <p>You have reached your borrow limit!</p>
-                <button clas="alertbtn" onclick="closeRepayDebt()">Okay</button>
+                <button class="alertbtn" onclick="closeRepayDebt()">Okay</button>
             </div>
 
             <div id="startWork" class="alert">
@@ -79,6 +79,24 @@
                 <h1>Error</h1>
                 <p>You need more <span id="sellItem">item</span>!</p>
                 <button class="alertbtn" onclick="closeItemAlert()">Okay</button>
+            </div>
+
+            <div id="moreHouse" class="alert">
+                <h1>Error</h1>
+                <p>You have run out of storage!</p>
+                <button class="alertbtn" onclick="closeMoreHouse()">Okay</button>
+            </div>
+
+            <div id="maxHouse" class="alert">
+                <h1>Error</h1>
+                <p>Your house is already max level!</p>
+                <button class="alertbtn" onclick="closeMaxHouse()">:(</button>
+            </div>
+
+            <div id="congratulateHouse" class="alert">
+                <h1>Congratulations!</h1>
+                <p>You now have the biggest house in all of <span id="townName" style="text-transform:capitalize">town</span>! Now go and do the same in another town!</p>
+                <button class="alertbtn" onclick="closeCongratulateHouse()">Heck yeah!</button>
             </div>
 
             <div id="secret" class="alert">
@@ -134,7 +152,7 @@
                 <h2>Meme Valley</h2>
                 <p>Housing Cost: <span id="meme-cost">824000</span> updoots</p>
                 <p>Item Specialty: Dead memes</p>
-                <img src="images/monobank.png" />
+                <img src="images/pepe.jpg" />
                 <br>
                 <button onclick="visitTown('meme')">Go to Town</button>
                 <br>
@@ -244,7 +262,7 @@
                             <p>Storage available: <span id="flavourtown-storage">10</span> items</p>
                             <p>Upgrade cost: <span id="flavourtown-storage-cost">400</span> updoots</p>
                             <p>Add more storage: <span id="flavourtown-storage-gain">5</span> items</p>
-                            <img src="images/monobank.png" alt="house" id="flavourtown-storage-image">
+                            <img src="images/flavourtown-storage/1.png" alt="house" id="flavourtown-storage-image">
                             <br>
                             <button onclick="upgradeHouse('flavourtown')">Upgrade</button>
                         </div>
