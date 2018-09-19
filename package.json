@@ -7,11 +7,17 @@
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder",
-    "build": "build",
-    "ship": "build --mac --win -p always"
+    "build": "build --mac --linux --win",
+    "ship": "build --mac --linux --win -p always",
+    "appImage": "build --linux appImage"
   },
-  "author": "Yeetmeister",
+  "author": {
+    "name": "Epzilepzi",
+    "email": "epzilepzi@gmail.com",
+    "url": "https://epzilepzi.site"
+  },
   "license": "ISC",
+  
   "devDependencies": {
     "ajv": "^6.5.3",
     "asar": "^0.14.3",
@@ -30,9 +36,8 @@
       "icon": "icons/icon.icns"
     },
     "linux": {
-      "target": "AppImage",
-      "productName": "Spree",
-      "category": "Game"
+      "target": "appImage",
+      "icon": "icons/icon.icns"
     }
   },
   "dependencies": {
