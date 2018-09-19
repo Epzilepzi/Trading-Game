@@ -1,6 +1,6 @@
 electron-builder.yml
 /dist
-/node_modules
+node_modules
 /package-lock.json
 ship.sh
 working files
