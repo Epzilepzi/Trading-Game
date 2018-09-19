@@ -28,6 +28,11 @@
     "mac": {
       "category": "public.app-category.games",
       "icon": "icons/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "productName": "Spree",
+      "category": "Game"
     }
   },
   "dependencies": {
