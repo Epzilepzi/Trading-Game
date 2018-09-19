@@ -612,6 +612,7 @@ button.small {
     padding: 0px;
     display: none;
     z-index: 1;
+    overflow: hidden;
 }
 
 #devPanel img {
