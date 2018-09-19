@@ -4,26 +4,32 @@ $(document).ready (
     }
 );
 
+volume = 0.5;
+
 function play(item) {
     var itemSound = document.getElementById(item+"-sound");
     itemSound.play();
+    itemSound.volume = volume;
     item.currentTime = 0;
 }
 
 function playBg() {
     var music = document.getElementById("bgmusic");
+    music.volume = volume;
     music.play();
     music.currentTime = 0;
 }
 
 function playSell() {
     var sound = document.getElementById("sellSound");
+    sound.volume = volume;
     sound.play();
     sound.currentTime = 0;
 }
 
 function stopMusic(audio) {
     var sound = document.getElementById(audio+"-sound");
+    sound.volume = volume;
     sound.pause();
     sound.currentTime = 0;
 }

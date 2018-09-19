@@ -32,8 +32,27 @@ function sendStatusToWindow(text) {
 }
 
 function createDefaultWindow() {
-  win = new BrowserWindow({width: 900, height: 680});
+  win = new BrowserWindow({
+    name: "Game Window",
+    width: 900,
+    minWidth: 600, 
+    height: 700,
+    minHeight: 300,
+    skipTaskbar: false,
+    autoHideMenuBar: true,
+    // toolbar: false,
+    title: "Spree",
+    show: false
+  });
+  // win.setMenu(null);
   win.loadFile(`index.html`);
+  // win.webContents.openDevTools({detach:true});
+  win.once('ready-to-show', () => {
+    win.show();
+  });
+  win.on('closed', function() {
+    win = null;
+  });
   return win;
 }
 
@@ -57,10 +76,42 @@ autoUpdater.on('update-downloaded', (ev, info) => {
 });
 
 app.on('ready', function() {
+  const template = [
+    {
+      label: 'View',
+      submenu: [
+        {role: 'reload'},
+        {role: 'forcereload'},
+        {role: 'toggledevtools'},
+        {type: 'separator'},
+        {role: 'resetzoom'},
+        {role: 'zoomin'},
+        {role: 'zoomout'},
+        {type: 'separator'},
+        {role: 'togglefullscreen'}
+      ]
+    },
+  ];
+  
+  if (process.platform === 'darwin') {
+    template.unshift({
+      label: app.getName(),
+      submenu: [
+        {role: 'about'},
+        {type: 'separator'},
+        {role: 'services', submenu: []},
+        {type: 'separator'},
+        {role: 'hide'},
+        {role: 'hideothers'},
+        {role: 'unhide'},
+        {type: 'separator'},
+        {role: 'quit'}
+      ]
+    });
+  }
   // Create the Menu
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
-
   createDefaultWindow();
 });
 

@@ -9,7 +9,8 @@
     "dist": "electron-builder",
     "build": "build --mac --linux --win",
     "ship": "build --mac --linux --win -p always",
-    "appImage": "build --linux appImage"
+    "appImage": "build --linux appImage",
+    "buildWin": "build --win"
   },
   "author": {
     "name": "Epzilepzi",
@@ -28,7 +29,7 @@
     "productName": "Spree",
     "appId": "com.yeetmeister.spree",
     "win": {
-      "target": "nsis",
+      "target": "portable",
       "icon": "icons/icon.ico"
     },
     "mac": {

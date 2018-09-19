@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
+::-webkit-scrollbar-track {
+    display: none;
+}
+
 
 /* General CSS */
 html, body {
@@ -11,6 +15,7 @@ html, body {
     margin: 0px;
     background-color: navy;
     overflow-wrap: break-word;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 h1 {
@@ -65,7 +70,7 @@ button:ACTIVE {
 /* Reference: https://www.w3schools.com/howto/howto_css_overlay.asp */
 #intro {
     position: fixed; /* Sit on top of the page content */
-    display: block; /* Hidden by default */
+    display: block; 
     width: 100%; /* Full width (cover the whole page) */
     height: 100%; /* Full height (cover the whole page) */
     top: 0;
@@ -74,6 +79,35 @@ button:ACTIVE {
     bottom: 0;
     background-color: #000000; /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    /* cursor: pointer; Add a pointer on hover */
+}
+
+.story {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000; /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    color: white;
+    text-align: center;
+    margin: 20% auto; 
+    /* cursor: pointer; Add a pointer on hover */
+}
+
+#storyBG {
+    position: fixed; /* Sit on top of the page content */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000; /* Black background with opacity */
     /* cursor: pointer; Add a pointer on hover */
 }
 
@@ -86,7 +120,7 @@ button:ACTIVE {
     text-align: center; 
     position: relative;  
     width: 100%;
-    top: 45%;
+    top: 37%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     font-size: 48px;
@@ -97,7 +131,6 @@ button:ACTIVE {
 }
 
 #intro #titleSubtitle {
-    bottom: 0;
     font-size: 18px;
     color: white;
     text-align: center;
@@ -105,6 +138,7 @@ button:ACTIVE {
     left: 50%;
     transform: translateX(-50%);
     display: none;
+    bottom: 0;
 }
 
 /* End Title Screen */
@@ -824,5 +858,55 @@ h1.closebtn {
 
     #footer #muteButton {
         font-size: 14px;
+    }
+}
+
+@media only screen and (max-height: 525px) {
+    #titleScreen-content {
+        font-size: 24px;
+        top: 30%;
+    }
+
+    #titleScreen-content h1 {
+        margin-bottom: 10px;
+    }
+
+    #intro #titleSubtitle {
+        font-size: 12px;
+    }
+
+    #playButton {
+        font-size: 18px;
+        padding: 10px 15px;
+    }
+
+    #titleSubtitle #muteButton {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+
+@media only screen and (max-height: 300px) {
+    #titleScreen-content {
+        font-size: 16px;
+        top: 20%;
+    }
+
+    #titleScreen-content h1 {
+        margin-bottom: 0px;
+    }
+
+    #intro #titleSubtitle {
+        font-size: 10px;
+    }
+
+    #playButton {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+
+    #titleSubtitle #muteButton {
+        font-size: 12px;
+        padding: 5px 10px;
     }
 }

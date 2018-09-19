@@ -15,7 +15,7 @@ $(document).ready (
     }
 );
 
-var townName = any;
+var townName = "";
 
 /* Trading Functions */
 // Change all prices
