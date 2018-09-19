@@ -16,7 +16,7 @@
     "ajv": "^6.5.3",
     "asar": "^0.14.3",
     "electron": "^2.0.8",
-    "electron-builder": "^20.28.3"
+    "electron-builder": "^20.28.4"
   },
   "build": {
     "productName": "Spree",
