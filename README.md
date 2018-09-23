@@ -66,3 +66,9 @@ Wii Shop Channel Music (meme.mp3):
 <https://www.youtube.com/watch?v=8avMLHvLwRQ>  
 
 Windows 2000 (xp.wav), Windows XP (secret.mp3) and Windows Vista Sounds (error.wav)  
+
+### **Images:**  
+
+All images except for the memes were hand drawn by me. Memes were found off Google Images.  
+
+All resources used belong to their respective owners.  
