@@ -8,9 +8,10 @@
     "start": "electron .",
     "dist": "electron-builder",
     "build": "build --mac --linux --win",
-    "ship": "build --mac --linux --win -p always",
+    "ship": "build --mac --linux -p always",
     "appImage": "build --linux appImage",
-    "buildWin": "build --win"
+    "buildWin": "build --win",
+    "shipWin": "build --win -p always"
   },
   "author": {
     "name": "Epzilepzi",
