@@ -24,6 +24,9 @@ https://www.w3schools.com/tags/av_prop_muted.asp
 Audio Volume:
 https://www.w3schools.com/TAGS/av_prop_volume.asp
 
+Hide Scrollbar:
+https://stackoverflow.com/questions/44990519/how-do-i-disable-the-horizontal-scroll-bar-in-electron-browserwindow?rq=1
+
 <br>
 
 ## **Music & Sounds:**

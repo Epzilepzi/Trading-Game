@@ -512,6 +512,7 @@ function closeAllAlerts() {
     closeDevMode();
     closeMaxHouse();
     closeMoreHouse();
+    closeKarmaAlert();
 }
 
 /* Unlock Functions */
@@ -585,6 +586,8 @@ function showRealEstate (name) {
 function upgradeHouse(town) {
     var townDiv = town + "-storage";
     var house = document.getElementById(townDiv);
+    var flavour = document.getElementById("flavourtown-storage-level");
+    var meme = document.getElementById("meme-storage-level");
     var cost = document.getElementById(townDiv + "-cost");
     var gain = document.getElementById(townDiv + "-gain");
     var level = document.getElementById(townDiv + "-level");
@@ -602,17 +605,22 @@ function upgradeHouse(town) {
             else {
                 gain.innerHTML = parseInt(gain.innerHTML) - (100 - parseInt(gain.innerHTML));
             }
-            if (cost.innerHTML * 1.5 <= 100000) {
+            if (cost.innerHTML * 1.5 <= 1000000) {
                 cost.innerHTML = Math.floor(parseInt(cost.innerHTML) * 1.5);
             }
             else {
-                cost.innerHTML = 100000;
+                cost.innerHTML = 1000000;
             }
             if (parseInt(level.innerHTML) <= 5) {
                 image.src = "images/" + townDiv + "/" + level.innerHTML + ".png";
             }
             if (parseInt(level.innerHTML) === 100) {
-                showCongratulateHouse(town);
+                if (parseInt(meme.innerHTML) === parseInt(flavour.innerHTML)) {
+                    showWinAlert();
+                } 
+                else {
+                    showCongratulateHouse(town);
+                }
             }
         }
         else {
@@ -626,3 +634,28 @@ function upgradeHouse(town) {
 }
 
 /* End Housing Functions */
+
+/* Win Game */
+
+function showWinAlert() {
+    closeAllAlerts();
+    $("#winAlert").show();
+    $("#alert").show();
+    play("xp");
+}
+
+function winGame() {
+    closeAllAlerts();
+    toggleMenuPanel();
+    $("#body").fadeOut(1500);
+    setTimeout (
+        function () {
+            $("#win").fadeIn(1500);
+            rollcredits();
+        }, 500
+    );
+    music.src = "audio/easy.mp3";
+    playBg("bgmusic");
+}
+
+/* End Win Game */

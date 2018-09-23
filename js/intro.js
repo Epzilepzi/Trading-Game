@@ -59,11 +59,11 @@ function closeIntro() {
             setTimeout(
                 function () {
                     $("#storyBG").fadeOut(3000);
-                }, 21000
+                }, 24000
             );
         }, 3000
     );
-    $("body").css("overflow", "overlay");
+    $("body").css("overflow", "auto");
     // stopMusic(intro);
 }
 

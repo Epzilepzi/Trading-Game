@@ -115,11 +115,18 @@
                 <button class="alertbtn" onclick="closePassError()">Okay</button>
             </div>
 
+            <div id="winAlert" class="alert">
+                <h1>Congratulations!</h1>
+                <p>Due to your excellent hard work and fantastic trading skills, once again you have the largest house in all of Javatown!</p>
+                <button id="winButton" onclick="winGame()">Yay!</button>
+            </div>
+
             <div id="devPanel" class="alert">
                 <h1>Dev Menu</h1>
                 <br>
                 <button onclick="maxUpdoots()">Give Updoots</button>
                 <button onclick="maxKarma()">Give Karma</button>
+                <button onclick="showWinAlert()">Win Game</button>
                 <button onclick="closeDevMode()">Close Dev Menu</button>
             </div>
         </div>
@@ -136,15 +143,15 @@
         </div>
 
         <div id="story1" class="story">
-            <h1>Story 1</h1>
+            <p>Once upon a time, you had the biggest house in all of Javaland...</p>
         </div>
 
         <div id="story2" class="story">
-            <h1>Story 2</h1>
+            <p>But when you left Javaland for greater endeavour, all your houses were destroyed in a disaster.</p>
         </div>
 
         <div id="story3" class="story">
-            <h1>Story 3</h1>
+            <p>Now that you have come back, you set out on your goal of having the biggest house again.</p>
         </div>
 
         <div id="storyBG"></div>
@@ -175,6 +182,14 @@
             <div id="footer" style="margin:0px;padding:0px;">
                 <button id="muteButton" onclick="toggleMute()" style="margin:0px;">Toggle Music</button>
             </div>
+        </div>
+
+        <div id="win">
+            <h2>Yeetmeister Software Presents...</h2>
+            <h2>An Epzilepzi Game...</h1>
+            <h2>Written and designed by Epzilepzi...</h2>
+            <h2>With guidance from Peter Howse...</h2>
+            <h1>Spree</h1>
         </div>
 
         <div id="body">
@@ -251,6 +266,7 @@
             <div id="menuFeatures">
                 <h1>Menu</h1>
                 <button onclick="backToMenu()">Change Town</button>
+                <button onclick="location.reload(true)">Restart Game</button>
             </div>
 
             <!-- Game Content -->
@@ -374,6 +390,23 @@
                         <audio id="sellSound" src="audio/sell.wav" hidden="true"></audio>
     
                         <h1>Meme Valley</h1>
+
+                        <div style="text-align:center;margin-bottom:0px;">
+                            <button id="meme-housingbutton" onclick="showRealEstate('meme')">Visit Real Estate Agency</button>
+                        </div>
+    
+                        <div id="meme-housing" class="housing">
+                            <div id="house">
+                                <h2>Meme Valley House</h2>
+                                <p>House Level: <span id="meme-storage-level">1</span></p>
+                                <p>Storage available: <span id="meme-storage">15</span> items</p>
+                                <p>Upgrade cost: <span id="meme-storage-cost">1200</span> updoots</p>
+                                <p>Add more storage: <span id="meme-storage-gain">5</span> items</p>
+                                <img src="images/meme-storage/1.png" alt="house" id="meme-storage-image">
+                                <br>
+                                <button onclick="upgradeHouse('meme')">Upgrade</button>
+                            </div>
+                        </div>
     
                         <div id="item">
                             <div id="item1">
@@ -414,15 +447,27 @@
                         </div>
                             
                         <div id="item">
-                            <h2>Doge</h2>
-                            <p>Amount: <span id="doge">0</span></p>
-                            <p>Cost: <span id="doge-cost" class="prices">41</span> updoots</p>
-                            <p>Happyz: <span id="doge-happyz" class="happyz">83</span></p>
-                            <img src="images/doge.jpg" alt="doge"/>
-                            <br>
-                            <button onclick="buy('doge')">Buy</button>
-                            <button onclick="sell('doge');">Sell</button>
-                            <audio id="doge-sound" src="audio/doge.mp3"></audio>
+                            <div id="doge-content" class="item-content">
+                                <h2>Doge</h2>
+                                <p>Amount: <span id="doge">0</span></p>
+                                <p>Cost: <span id="doge-cost" class="prices">41</span> updoots</p>
+                                <p>Happyz: <span id="doge-happyz" class="happyz">83</span></p>
+                                <img src="images/doge.jpg" alt="doge"/>
+                                <br>
+                                <button onclick="buy('doge')">Buy</button>
+                                <button onclick="sell('doge');">Sell</button>
+                                <audio id="doge-sound" src="audio/doge.mp3"></audio>
+                            </div>
+                            <div id="unlock-doge" class="unlock">
+                                <h2>Locked</h2>
+                                <p>Happyz to unlock: <span id="doge-unlock-karma">12345</span> karma</p>
+                                <p>Cost to unlock: <span id="doge-unlock-cost">41</span> updoots</p>
+                                <p>Happyz earnt from unlock: <span id="doge-unlock-happyz">83</span></p>
+                                <img src="images/lock.png" alt="locked"/>
+                                <br>
+                                <button onclick="unlock('doge')">Unlock</button>
+                                <audio id="unlock-sound" src="audio/unlock.wav"></audio>
+                            </div>
                         </div>
     
                         <div id="item">
