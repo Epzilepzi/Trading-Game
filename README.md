@@ -1,20 +1,13 @@
-# Trading Game
+# Trading Game  
 
 This is a very basic trading game.  
 
 Download the packaged app version [here.](https://github.com/Epzilepzi/Trading-Game/releases)  
-  
 An online version is also available at [https://epzilepzi.site/js-game/game.html](https://epzilepzi.site/js-game/game.html)  
 
-All resources used belong to their respective owners. I do not take credit for anything I did not make.  
-  
-------  
+## **List of sources referenced:**  
 
-## **List of sources referenced:**
-
-------
-  
-## **Code:**
+### **Code:**  
 
 CSS Fullscreen Overlay:  
 <https://www.w3schools.com/howto/howto_css_overlay.asp>  
@@ -30,9 +23,9 @@ Audio Volume:
 
 Hide Scrollbar:  
 <https://stackoverflow.com/questions/44990519/how-do-i-disable-the-horizontal-scroll-bar-in-electron-browserwindow?rq=1>  
-  
-## **Music & Sounds:**
-  
+
+### **Music & Sounds:**  
+
 "Adventure Meme" (intromusic.mp3), "Easy Lemon" (easy.mp3)  
 Kevin MacLeod (incompetech.com)  
 Licensed under Creative Commons: By Attribution 3.0  
