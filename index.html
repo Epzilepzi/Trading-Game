@@ -25,6 +25,7 @@
         <script src="js/game.js"></script>
         <script src="js/menu.js"></script>
         <script src="js/dev.js"></script>
+        <script src="js/credits.js"></script>
         <script>
                 $(document).ready (
                     function () {
@@ -118,7 +119,31 @@
             <div id="winAlert" class="alert">
                 <h1>Congratulations!</h1>
                 <p>Due to your excellent hard work and fantastic trading skills, once again you have the largest house in all of Javatown!</p>
-                <button id="winButton" onclick="winGame()">Yay!</button>
+                <button id="winButton" onclick="showCredits()">Yay!</button>
+            </div>
+
+            <div id="lossDebt" class="alert">
+                <h1>Oh no!</h1>
+                <p>Your debt has exceeded the bank's limit! You have been arrested and your assets seized!</p>
+                <button onclick="showCredits()">Oh heck...</button>
+            </div>
+
+            <div id="lossKarma" class="alert">
+                <h1>Oh no!</h1>
+                <p>Your karma level has gone below Javaland's minimum! Your citizenship has been revoked and you have been deported to Null Island!</p>
+                <button onclick="showCredits()">Oh heck...</button>
+            </div>
+
+            <div id="warnDebt" class="alert">
+                <h1>Warning!</h1>
+                <p>Your debt level has almost reached the bank limit of <span id="debtLimit">0</span> updoots!</p>
+                <button onclick="closeWarnDebt()">Okay</button>
+            </div>
+
+            <div id="warnKarma" class="alert">
+                <h1>Warning!</h1>
+                <p>Your karma is low! People are starting to lose trust in you!</p>
+                <button onclick="closeWarnKarma()">Okay</button>
             </div>
 
             <div id="devPanel" class="alert">
@@ -127,6 +152,9 @@
                 <button onclick="maxUpdoots()">Give Updoots</button>
                 <button onclick="maxKarma()">Give Karma</button>
                 <button onclick="showWinAlert()">Win Game</button>
+                <button onclick="showLossAlert('Debt')">Lose Game (Debt)</button>
+                <button onclick="showLossAlert('Karma')">Lose Game (Karma)</button>
+                <br>
                 <button onclick="closeDevMode()">Close Dev Menu</button>
             </div>
         </div>
@@ -184,12 +212,17 @@
             </div>
         </div>
 
-        <div id="win">
-            <h2>Yeetmeister Software Presents...</h2>
-            <h2>An Epzilepzi Game...</h1>
-            <h2>Written and designed by Epzilepzi...</h2>
-            <h2>With guidance from Peter Howse...</h2>
-            <h1>Spree</h1>
+        <div id="credits">
+            <h1>Thank you for playing Spree! </h1>
+            <h2>Lead Designer and Programmer:</h2>
+            <p>Epzilepzi</p>
+            <h2>Story written by:</h2>
+            <p>Epzilepzi</p>
+            <h2>Game Consultants:</h2>
+            <p>Peter Howse</p>
+            <h2>Sources Referenced:</h2>
+            <p>See <a href="README.html" target="_blank">here.</a></p>
+            <button onclick="location.reload(true)">Play Again!</button>
         </div>
 
         <div id="body">
@@ -265,6 +298,7 @@
             <!-- Menu menu-->
             <div id="menuFeatures">
                 <h1>Menu</h1>
+                <a href="README.html" target="_blank"><button>View Credits</button></a>
                 <button onclick="backToMenu()">Change Town</button>
                 <button onclick="location.reload(true)">Restart Game</button>
             </div>
@@ -396,7 +430,7 @@
                         </div>
     
                         <div id="meme-housing" class="housing">
-                            <div id="house">
+                            <div id="meme-house"  class="memehousing">
                                 <h2>Meme Valley House</h2>
                                 <p>House Level: <span id="meme-storage-level">1</span></p>
                                 <p>Storage available: <span id="meme-storage">15</span> items</p>
@@ -471,15 +505,27 @@
                         </div>
     
                         <div id="item">
-                            <h2>Kazoo</h2>
-                            <p>Amount: <span id="kazoo">0</span></p>
-                            <p>Cost: <span id="kazoo-cost" class="prices">54</span> updoots</p>
-                            <p>Happyz: <span id="kazoo-happyz" class="happyz">72</span></p>
-                            <img src="images/kazoo.jpeg" alt="kazoo"/>
-                            <br>
-                            <button onclick="buy('kazoo')">Buy</button>
-                            <button onclick="sell('kazoo');">Sell</button>
-                            <audio id="kazoo-sound" src="audio/kazoo.mp3"></audio>
+                            <div id="kazoo-content" class="item-content">
+                                <h2>Kazoo</h2>
+                                <p>Amount: <span id="kazoo">0</span></p>
+                                <p>Cost: <span id="kazoo-cost" class="prices">54</span> updoots</p>
+                                <p>Happyz: <span id="kazoo-happyz" class="happyz">72</span></p>
+                                <img src="images/kazoo.jpeg" alt="kazoo"/>
+                                <br>
+                                <button onclick="buy('kazoo')">Buy</button>
+                                <button onclick="sell('kazoo');">Sell</button>
+                                <audio id="kazoo-sound" src="audio/kazoo.mp3"></audio>
+                            </div>
+                            <div id="unlock-kazoo" class="unlock">
+                                <h2>Locked</h2>
+                                <p>Happyz to unlock: <span id="kazoo-unlock-karma">54236</span> karma</p>
+                                <p>Cost to unlock: <span id="kazoo-unlock-cost">54</span> updoots</p>
+                                <p>Happyz earnt from unlock: <span id="kazoo-unlock-happyz">72</span></p>
+                                <img src="images/lock.png" alt="locked"/>
+                                <br>
+                                <button onclick="unlock('kazoo')">Unlock</button>
+                                <audio id="unlock-sound" src="audio/unlock.wav"></audio>
+                            </div>
                         </div>
                     </div>
             </div>

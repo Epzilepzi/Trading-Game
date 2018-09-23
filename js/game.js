@@ -1,21 +1,28 @@
-$(document).ready (
+$(document).ready(
     function () {
         console.log("game.js loaded.");
     }
 );
 
-$(document).ready (
+$(document).ready(
     function () {
+        var winAlert = document.getElementById("winAlert");
+        var lossDebt = document.getElementById("lossDebt");
+        var lossKarma = document.getElementById("lossKarma");
         var alert = document.getElementById("alert");
-        window.onclick = function(event) {
-            if (event.target === alert) {
+        window.onclick = function (event) {
+            if (event.target === alert && winAlert.style.display === "block" || event.target === alert && lossDebt.style.display === "block" || event.target === alert && lossKarma.style.display === "block") {
+                showCredits();
+            }
+            else if (event.target === alert) {
                 closeAllAlerts();
             }
-        }; 
+        };
     }
 );
 
 var townName = "";
+var debtLimit = 99999999999;
 
 /* Trading Functions */
 // Change all prices
@@ -32,17 +39,15 @@ function changeAllPrices() {
 }
 
 // Buy Stuff
-function buy(item){
+function buy(item) {
     var gold = document.getElementById("gold");
     var itemCount = document.getElementById(item);
-    var itemPrice = document.getElementById(item+"-cost");
+    var itemPrice = document.getElementById(item + "-cost");
     var happyz = document.getElementById("happyzValue");
-    var itemHappyz = document.getElementById(item+"-happyz");
-    var storage = document.getElementById(townName+"-storage");
-
-
+    var itemHappyz = document.getElementById(item + "-happyz");
+    var storage = document.getElementById(townName + "-storage");
     //alert(gold.innerHTML + " " + itemCount.innerHTML + " " + itemPrice.innerHTML);
-    if(parseInt(gold.innerHTML) - parseInt(itemPrice.innerHTML) >= 0 && parseInt(storage.innerHTML) > 0) {
+    if (parseInt(gold.innerHTML) - parseInt(itemPrice.innerHTML) >= 0 && parseInt(storage.innerHTML) > 0) {
         itemCount.innerHTML = parseInt(itemCount.innerHTML) + 1;
         happyz.innerHTML = parseInt(happyz.innerHTML) + parseInt(itemHappyz.innerHTML);
         gold.innerHTML = parseInt(gold.innerHTML) - parseInt(itemPrice.innerHTML);
@@ -57,18 +62,18 @@ function buy(item){
 }
 
 // Sell Stuff
- function sell(item){
+function sell(item) {
     var gold = document.getElementById("gold");
     var itemCount = document.getElementById(item);
-    var itemPrice = document.getElementById(item+"-cost");
+    var itemPrice = document.getElementById(item + "-cost");
     var happyz = document.getElementById("happyzValue");
-    var itemHappyz = document.getElementById(item+"-happyz");
-    var storage = document.getElementById(townName+"-storage");
+    var itemHappyz = document.getElementById(item + "-happyz");
+    var storage = document.getElementById(townName + "-storage");
 
     //Test that the variables are working.
     //alert(gold.innerHTML + " " + itemCount.innerHTML + " " + itemPrice.innerHTML);
 
-    if(parseInt(itemCount.innerHTML) > 0) {
+    if (parseInt(itemCount.innerHTML) > 0) {
         itemCount.innerHTML = parseInt(itemCount.innerHTML) - 1;
         happyz.innerHTML = parseInt(happyz.innerHTML) + parseInt(itemHappyz.innerHTML);
         gold.innerHTML = parseInt(gold.innerHTML) + parseInt(itemPrice.innerHTML);
@@ -86,11 +91,13 @@ function earnMoneyz() {
     var random = Math.floor(Math.random() * 16);
     var randomNumber = random - 5;
     if (parseInt(gold.innerHTML) >= 1000) {
+        changeAllPrices();
+        addInterest();
         showWorkAlert();
     } else if (parseInt(gold.innerHTML) + parseInt(randomNumber) <= 1000) {
         if (parseInt(gold.innerHTML) + parseInt(randomNumber) >= 0) {
-        gold.innerHTML = parseInt(gold.innerHTML) + parseInt(randomNumber);
-        addInterest();
+            gold.innerHTML = parseInt(gold.innerHTML) + parseInt(randomNumber);
+            addInterest();
         }
     } else {
         gold.innerHTML = parseInt(gold.innerHTML) + (1000 - parseInt(gold.innerHTML));
@@ -103,26 +110,22 @@ function earnMoneyz() {
 
 // Change Item Prices
 function changePrices(item) {
-    var itemPrice = document.getElementById(item+"-cost");
-    var itemHappyz = document.getElementById(item+"-happyz");
+    var itemPrice = document.getElementById(item + "-cost");
+    var itemHappyz = document.getElementById(item + "-happyz");
     var rand = Math.floor(Math.random() * 11) - 5;
     var randHappyz = Math.floor(Math.random() * 21) - 10;
     if (parseInt(itemPrice.innerHTML) + rand >= 2 && parseInt(itemPrice.innerHTML) + rand <= 100) {
         itemPrice.innerHTML = parseInt(itemPrice.innerHTML) + rand;
-    }
-    else if (parseInt(itemPrice.innerHTML) + rand < 2) {
+    } else if (parseInt(itemPrice.innerHTML) + rand < 2) {
         itemPrice.innerHTML = parseInt(itemPrice.innerHTML) + 10;
-    }
-    else if (parseInt(itemPrice.innerHTML) + rand <= 100) {
+    } else if (parseInt(itemPrice.innerHTML) + rand <= 100) {
         itemPrice.innerHTML = parseInt(itemPrice.innerHTML) - 10;
     }
-    if(parseInt(itemHappyz.innerHTML) + randHappyz >= 5 && parseInt(itemHappyz.innerHTML) + randHappyz <= 150) {
+    if (parseInt(itemHappyz.innerHTML) + randHappyz >= 5 && parseInt(itemHappyz.innerHTML) + randHappyz <= 150) {
         itemHappyz.innerHTML = parseInt(itemHappyz.innerHTML) + randHappyz;
-    }
-    else if (parseInt(itemHappyz.innerHTML) + randHappyz < 5) {
+    } else if (parseInt(itemHappyz.innerHTML) + randHappyz < 5) {
         itemHappyz.innerHTML = parseInt(itemHappyz.innerHTML) + 3;
-    }
-    else if (parseInt(itemHappyz.innerHTML) + randHappyz > 150) {
+    } else if (parseInt(itemHappyz.innerHTML) + randHappyz > 150) {
         itemHappyz.innerHTML = parseInt(itemHappyz.innerHTML) - 20;
     }
 }
@@ -131,7 +134,14 @@ function changePrices(item) {
 function loseKarma() {
     var karmaValue = document.getElementById("happyzValue");
     var rand = Math.floor(Math.random() * 6);
+    var karmaLimit = parseInt("-200");
     karmaValue.innerHTML = parseInt(karmaValue.innerHTML) - parseInt(rand);
+    if (parseInt(karmaValue.innerHTML) <= karmaLimit) {
+        showLossAlert("Karma");
+    }
+    else if (parseInt(karmaValue.innerHTML) <= parseInt("-100")) {
+        showWarnKarma();
+    }
 }
 
 /* End Trading Functions */
@@ -151,32 +161,29 @@ function openBank() {
         if (bank.innerHTML === "Visit Bank") {
             bank.innerHTML = "Leave Bank";
             /* footer.style.position = "fixed"; */
-            footer.style.bottom ="0"; 
-        }
-        else {
+            footer.style.bottom = "0";
+        } else {
             bank.innerHTML = "Visit Bank";
             /* footer.style.position = "initial"; */
-            footer.style.bottom ="auto";
+            footer.style.bottom = "auto";
         }
-    }
-    else {
+    } else {
         $("#bankPanel").slideToggle();
         $("#menuFeatures").slideToggle();
         menu.innerHTML = "Open Menu";
         if (bank.innerHTML === "Visit Bank") {
             bank.innerHTML = "Leave Bank";
             /* footer.style.position = "fixed"; */
-            footer.style.bottom ="0"; 
-        }
-        else {
+            footer.style.bottom = "0";
+        } else {
             bank.innerHTML = "Visit Bank";
             /* footer.style.position = "initial"; */
-            footer.style.bottom ="auto";
+            footer.style.bottom = "auto";
         }
     }
 }
 
-function borrowForm(){
+function borrowForm() {
     $("#borrowForm").slideToggle();
 }
 
@@ -185,24 +192,23 @@ function borrowMoneyz() {
     var number = parseInt($('#borrowInput').val());
     var gold = document.getElementById("gold");
     var debt = document.getElementById("debt-cost");
-    var karma = parseInt(document.getElementById("happyzValue").innerHTML);
-    if (parseInt(debt.innerHTML) >= parseInt(karma) + 100) {
+    var karma = document.getElementById("happyzValue");
+    debtLimit = (parseInt(karma.innerHTML) + 50) * 2;
+    if (parseInt(debt.innerHTML) >= parseInt(karma.innerHTML) + 100) {
         showRepayAlert();
-    }
-    else {
-        if (number <= karma + 100 && karma > 0) {
+    } else {
+        if (number <= parseInt(karma.innerHTML) + 100 && parseInt(karma.innerHTML) > 0) {
             gold.innerHTML = parseInt(gold.innerHTML) + number;
             debt.innerHTML = parseInt(debt.innerHTML) + number;
             playSell();
-        }
-        else if (isNaN(karma)) {
+        } else if (isNaN(parseInt(karma.innerHTML))) {
             alert("ERROR: something broke");
-            console.log(karma);  
-        } 
-        else {
+            console.log(karma);
+        } else {
             showItemAlert("karma");
             console.log(karma);
         }
+        console.log(debtLimit);
     }
 }
 
@@ -210,23 +216,24 @@ function borrowMoneyzMax() {
     var gold = document.getElementById("gold");
     var debt = document.getElementById("debt-cost");
     var karma = document.getElementById("happyzValue");
+    debtLimit = (parseInt(karma.innerHTML) + 50) * 2;
     if (parseInt(debt.innerHTML) >= parseInt(karma.innerHTML) + 100) {
         showRepayAlert();
-    }
-    else {
+    } else {
         gold.innerHTML = parseInt(gold.innerHTML) + parseInt(karma.innerHTML) + 100;
         debt.innerHTML = parseInt(debt.innerHTML) + parseInt(karma.innerHTML) + 100;
         playSell();
     }
+    console.log(debtLimit);
 }
 
 
-function repayForm(){
+function repayForm() {
     $("#repayForm").slideToggle();
 }
 
 function repayMoneyz() {
-    var number = parseInt( $('#repayInput').val() );
+    var number = parseInt($('#repayInput').val());
     var gold = document.getElementById("gold");
     var debt = document.getElementById("debt-cost");
     var karma = document.getElementById("happyzValue");
@@ -235,14 +242,11 @@ function repayMoneyz() {
         debt.innerHTML = parseInt(debt.innerHTML) - number;
         karma.innerHTML = parseInt(karma.innerHTML) + number;
         playSell();
-    }
-    else if (parseInt(debt.innerHTML) === 0) {
+    } else if (parseInt(debt.innerHTML) === 0) {
         nilDebtAlert();
-    }
-    else if (parseInt(debt.innerHTML) - number < 0) {
+    } else if (parseInt(debt.innerHTML) - number < 0) {
         showDebtAlert();
-    }
-    else {
+    } else {
         showMoneyzAlert("debt");
     }
 }
@@ -253,24 +257,36 @@ function repayAll() {
     var karma = document.getElementById("happyzValue");
     if (parseInt(debt.innerHTML) === 0) {
         nilDebtAlert();
-    }
-    else if (parseInt(gold.innerHTML) - parseInt(debt.innerHTML) >= 0) {
+    } else if (parseInt(gold.innerHTML) - parseInt(debt.innerHTML) >= 0) {
         gold.innerHTML = parseInt(gold.innerHTML) - parseInt(debt.innerHTML);
         karma.innerHTML = parseInt(karma.innerHTML) + parseInt(debt.innerHTML);
         debt.innerHTML = 0;
         playSell();
-    }
-    else if (parseInt(gold.innerHTML) - parseInt(debt.innerHTML) < 0) {
+    } else if (parseInt(gold.innerHTML) - parseInt(debt.innerHTML) < 0) {
         showMoneyzAlert('debt');
     }
 }
 
-function addInterest(){
+function addInterest() {
     var debt = document.getElementById("debt-cost");
+    var karma = document.getElementById("happyzValue");
     var interest = 1.012;
     var increase = parseInt(debt.innerHTML);
-    increase = Math.floor(increase * interest);
+    var heck = parseInt("-1");
+    debtLimit = (parseInt(karma.innerHTML) + 50) * 2;
+    if (increase <= 100 && increase > 0) {
+        increase = increase + 1;
+    }
+    else {
+        increase = Math.floor(increase * interest);
+    }
     debt.innerHTML = increase;
+    if (parseInt(debt.innerHTML) > debtLimit && parseInt(karma.innerHTML) > 0) {
+        showLossAlert("Debt");
+    }
+    else if (parseInt(debt.innerHTML) > (parseInt(karma.innerHTML) + 50) * 1.5 && parseInt(karma.innerHTML) > 0) {
+        showWarnDebt();
+    } 
 }
 
 /* End Bank Functions */
@@ -287,27 +303,24 @@ function toggleMenuPanel() {
         if (menu.innerHTML === "Open Menu") {
             menu.innerHTML = "Close Menu";
             /* footer.style.position = "fixed"; */
-            footer.style.bottom ="0"; 
-        }
-        else {
+            footer.style.bottom = "0";
+        } else {
             menu.innerHTML = "Open Menu";
             /* footer.style.position = "initial"; */
-            footer.style.bottom ="auto";
+            footer.style.bottom = "auto";
         }
-    }
-    else {
+    } else {
         $("#menuFeatures").slideToggle();
         $("#bankPanel").slideToggle();
         bank.innerHTML = "Visit Bank";
         if (menu.innerHTML === "Open Menu") {
             menu.innerHTML = "Close Menu";
             /* footer.style.position = "fixed"; */
-            footer.style.bottom ="0"; 
-        }
-        else {
+            footer.style.bottom = "0";
+        } else {
             menu.innerHTML = "Open Menu";
             /* footer.style.position = "initial"; */
-            footer.style.bottom ="auto";
+            footer.style.bottom = "auto";
         }
     }
 }
@@ -320,7 +333,7 @@ function backToMenu() {
     var menugold = document.getElementById("menu-gold");
     menugold.innerHTML = gold.innerHTML;
     toggleMenuPanel();
-    setTimeout (
+    setTimeout(
         function () {
             $("#content").fadeToggle(500);
             $("#body").fadeToggle(500);
@@ -328,7 +341,7 @@ function backToMenu() {
                 function () {
                     $("#mainMenu").fadeIn(500);
                 }, 500
-            ); 
+            );
         }, 500
     );
     /* document.getElementById(town[0]).fadeOut(1000);
@@ -339,7 +352,7 @@ function backToMenu() {
                 document.getElementById(town[0]).style.display = "none";
                 document.getElementById(town[1]).style.display = "none";
             */
-           document.getElementById(townName).style.display = "none";
+            document.getElementById(townName).style.display = "none";
         }, 1000
     );
     music.src = "audio/intromusic.mp3";
@@ -398,19 +411,17 @@ function payRemainingDebt() {
     var gold = document.getElementById("gold");
     var debt = document.getElementById("debt-cost");
     var karma = document.getElementById("happyzValue");
-    var short = document.getElementById("moreUpdoot");
     if (parseInt(gold.innerHTML) - parseInt(debt.innerHTML) >= 0) {
         gold.innerHTML = parseInt(gold.innerHTML) - parseInt(debt.innerHTML);
         debt.innerHTML = parseInt(debt.innerHTML) - parseInt(debt.innerHTML);
         karma.innerHTML = parseInt(karma.innerHTML) + parseInt(debt.innerHTML);
         playSell();
         closeDebtAlert();
-    }
-    else if (parseInt(gold.innerHTML) - parseInt(debt.innerHTML) < 0) {
+    } else if (parseInt(gold.innerHTML) - parseInt(debt.innerHTML) < 0) {
         $("#noDebtAlert").hide();
         $("#alert").hide();
         showMoneyzAlert("debt");
-    }
+    } 
 }
 
 function showWorkAlert() {
@@ -513,13 +524,15 @@ function closeAllAlerts() {
     closeMaxHouse();
     closeMoreHouse();
     closeKarmaAlert();
+    closeWarnDebt();
+    closeWarnKarma();
 }
 
 /* Unlock Functions */
 
 function levelUp(product) {
-    var item = document.getElementById(product+"-content");
-    var unlock = document.getElementById("unlock-"+product);
+    var item = document.getElementById(product + "-content");
+    var unlock = document.getElementById("unlock-" + product);
     // var test = "'#" + product + "-content'";
     // console.log(test);
     console.log(item.id);
@@ -528,31 +541,27 @@ function levelUp(product) {
 }
 
 function unlock(item) {
-    var karma = parseInt(document.getElementById(item+"-unlock-karma").innerHTML); // How karma needed to unlock
-    var cost = parseInt(document.getElementById(item+"-unlock-cost").innerHTML); // How many updoots you need to unlock
-    var happyz = parseInt(document.getElementById(item+"-unlock-happyz").innerHTML); // How much karma you will get from unlock
+    var karma = parseInt(document.getElementById(item + "-unlock-karma").innerHTML); // How karma needed to unlock
+    var cost = parseInt(document.getElementById(item + "-unlock-cost").innerHTML); // How many updoots you need to unlock
+    var happyz = parseInt(document.getElementById(item + "-unlock-happyz").innerHTML); // How much karma you will get from unlock
     var happyzValue = document.getElementById("happyzValue").innerHTML; // Current karma value
     var gold = document.getElementById("gold").innerHTML; // Current gold value
     var short = item + "-unlock";
- // Check if karma value - needed karma is >= 0 AND if gold - cost is >= 0
-        if (parseInt(happyzValue) - karma >= 0 && parseInt(gold) - cost >= 0) {// Case if ^ is true
-            levelUp(item); //Unlocks item
-            document.getElementById("gold").innerHTML = parseInt(gold) - cost;
-            document.getElementById("happyzValue").innerHTML = parseInt(happyzValue) + happyz;
-            console.log(parseInt(happyzValue) - karma);
-            console.log(parseInt(gold) - cost);
-            console.log(gold);
-            console.log(happyzValue);
-            playSell();
-        }
-        else if (parseInt(happyzValue) - karma < 0) {
-            showKarmaAlert(item);
-        }
-            
-
-        else if (parseInt(gold) - cost < 0) {
-            showMoneyzAlert(short);
-        }
+    // Check if karma value - needed karma is >= 0 AND if gold - cost is >= 0
+    if (parseInt(happyzValue) - karma >= 0 && parseInt(gold) - cost >= 0) { // Case if ^ is true
+        levelUp(item); //Unlocks item
+        document.getElementById("gold").innerHTML = parseInt(gold) - cost;
+        document.getElementById("happyzValue").innerHTML = parseInt(happyzValue) + happyz;
+        console.log(parseInt(happyzValue) - karma);
+        console.log(parseInt(gold) - cost);
+        console.log(gold);
+        console.log(happyzValue);
+        playSell();
+    } else if (parseInt(happyzValue) - karma < 0) {
+        showKarmaAlert(item);
+    } else if (parseInt(gold) - cost < 0) {
+        showMoneyzAlert(short);
+    }
 }
 
 
@@ -570,16 +579,15 @@ function maxKarma() {
 }
 
 /* Housing Functions */
-function showRealEstate (name) {
-    var town = name+"-housing";
-    var button = document.getElementById(name+"-housingbutton");
+function showRealEstate(name) {
+    var town = name + "-housing";
+    var button = document.getElementById(name + "-housingbutton");
     if (button.innerHTML === "Visit Real Estate Agency") {
         button.innerHTML = "Leave Real Estate Agency";
-    }
-    else {
+    } else {
         button.innerHTML = "Visit Real Estate Agency";
     }
-    $("#"+town).slideToggle();
+    $("#" + town).slideToggle();
     console.log(town);
 }
 
@@ -601,14 +609,12 @@ function upgradeHouse(town) {
             level.innerHTML = parseInt(level.innerHTML) + 1;
             if (parseInt(gain.innerHTML * 1.25) <= 100) {
                 gain.innerHTML = Math.floor(parseInt(gain.innerHTML) * 1.25);
-            }
-            else {
+            } else {
                 gain.innerHTML = parseInt(gain.innerHTML) - (100 - parseInt(gain.innerHTML));
             }
             if (cost.innerHTML * 1.5 <= 1000000) {
                 cost.innerHTML = Math.floor(parseInt(cost.innerHTML) * 1.5);
-            }
-            else {
+            } else {
                 cost.innerHTML = 1000000;
             }
             if (parseInt(level.innerHTML) <= 5) {
@@ -617,18 +623,15 @@ function upgradeHouse(town) {
             if (parseInt(level.innerHTML) === 100) {
                 if (parseInt(meme.innerHTML) === parseInt(flavour.innerHTML)) {
                     showWinAlert();
-                } 
-                else {
+                } else {
                     showCongratulateHouse(town);
                 }
             }
-        }
-        else {
+        } else {
             showMoneyzAlert(townDiv);
             console.log(parseInt(gold) - parseInt(cost.innerHTML));
         }
-    }
-    else if (parseInt(level.innerHTML) >= 100) {
+    } else if (parseInt(level.innerHTML) >= 100) {
         showMaxHouse();
     }
 }
@@ -644,18 +647,54 @@ function showWinAlert() {
     play("xp");
 }
 
-function winGame() {
+function showLossAlert(method) {
     closeAllAlerts();
-    toggleMenuPanel();
-    $("#body").fadeOut(1500);
-    setTimeout (
-        function () {
-            $("#win").fadeIn(1500);
-            rollcredits();
-        }, 500
-    );
-    music.src = "audio/easy.mp3";
-    playBg("bgmusic");
+    $("#loss"+method).show();
+    $("#alert").show();
+    play("error");
 }
 
 /* End Win Game */
+
+/* Game over warnings */
+var shownKarma = 0;
+function showWarnKarma() {
+    if (shownKarma === 0) {
+        $("#warnKarma").show();
+        $("#alert").show();
+        play("secret");
+        shownKarma = 1;
+    }
+    else if (shownKarma === 1) {
+        console.log("the player is close to losing");
+    }
+}
+
+var alreadyShown = 0;
+function showWarnDebt() {
+    var debtLimitValue = document.getElementById("debtLimit");
+    if (alreadyShown === 0) {
+        debtLimitValue.innerHTML = debtLimit;
+        $("#warnDebt").show();
+        $("#alert").show();
+        play("secret");
+        alreadyShown = 1;
+    }
+    else if (alreadyShown === 1) {
+        console.log("the player is close to losing");
+    }
+}
+
+function closeWarnKarma() {
+    $("#warnKarma").hide();
+    $("#alert").hide();
+    play("moneyz");
+}
+
+function closeWarnDebt() {
+    $("#warnDebt").hide();
+    $("#alert").hide();
+    play("moneyz");
+}
+
+/* End game over warnings */

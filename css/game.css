@@ -1,14 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
 ::-webkit-scrollbar-track {
     display: none;
 }
-::-webkit-scrollbar { 
-    display: none; 
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 
 /* General CSS */
-html, body {
+html,
+body {
     font-family: Arial, Helvetica, sans-serif;
     width: 100%;
     bottom: 0px;
@@ -38,7 +41,7 @@ button {
     margin-bottom: 15px;
     margin-top: 15px;
 }
-    
+
 button:ACTIVE {
     box-shadow: 1px 3px 2px #999;
     transform: translateY(2px);
@@ -72,33 +75,44 @@ button:ACTIVE {
 
 /* Reference: https://www.w3schools.com/howto/howto_css_overlay.asp */
 #intro {
-    position: fixed; /* Sit on top of the page content */
-    display: block; 
-    width: 100%; /* Full width (cover the whole page) */
-    height: 100%; /* Full height (cover the whole page) */
+    position: fixed;
+    /* Sit on top of the page content */
+    display: block;
+    width: 100%;
+    /* Full width (cover the whole page) */
+    height: 100%;
+    /* Full height (cover the whole page) */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #000000; /* Black background with opacity */
-    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    background-color: #000000;
+    /* Black background with opacity */
+    z-index: 2;
+    /* Specify a stack order in case you're using a different order for other elements */
     /* cursor: pointer; Add a pointer on hover */
 }
 
 .story {
-    position: fixed; /* Sit on top of the page content */
-    display: none; /* Hidden by default */
-    width: 100%; /* Full width (cover the whole page) */
-    height: 100%; /* Full height (cover the whole page) */
+    position: fixed;
+    /* Sit on top of the page content */
+    display: none;
+    /* Hidden by default */
+    width: 100%;
+    /* Full width (cover the whole page) */
+    height: 100%;
+    /* Full height (cover the whole page) */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #000000; /* Black background with opacity */
-    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    background-color: #000000;
+    /* Black background with opacity */
+    z-index: 2;
+    /* Specify a stack order in case you're using a different order for other elements */
     color: white;
     text-align: center;
-    margin: 20% auto; 
+    margin: 20% auto;
     /* cursor: pointer; Add a pointer on hover */
 }
 
@@ -108,25 +122,30 @@ button:ACTIVE {
 }
 
 #storyBG {
-    position: fixed; /* Sit on top of the page content */
-    width: 100%; /* Full width (cover the whole page) */
-    height: 100%; /* Full height (cover the whole page) */
+    position: fixed;
+    /* Sit on top of the page content */
+    width: 100%;
+    /* Full width (cover the whole page) */
+    height: 100%;
+    /* Full height (cover the whole page) */
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #000000; /* Black background with opacity */
+    background-color: #000000;
+    /* Black background with opacity */
     /* cursor: pointer; Add a pointer on hover */
 }
 
 #titleScreen-content {
     color: white;
-    text-align: center; /* Centered text/links */
-    /* margin-top: 30px;  30px top margin to avoid conflict with the close button on smaller screens */ 
+    text-align: center;
+    /* Centered text/links */
+    /* margin-top: 30px;  30px top margin to avoid conflict with the close button on smaller screens */
     display: none;
     justify-content: center;
-    text-align: center; 
-    position: relative;  
+    text-align: center;
+    position: relative;
     width: 100%;
     top: 37%;
     left: 50%;
@@ -291,7 +310,7 @@ button.small {
     margin-bottom: 15px;
     margin-top: 15px;
 } */
-    
+
 #earn button:ACTIVE {
     box-shadow: 1px 3px 2px #999;
     transform: translateY(2px);
@@ -359,7 +378,7 @@ button.small {
 */
 
 #bankPanel input[type=number] {
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
 }
 
 #bankPanel input::-webkit-outer-spin-button {
@@ -383,7 +402,7 @@ button.small {
     margin-bottom: 15px;
     margin-top: 15px;
 }
-    
+
 #bankPanel input[type=submit]:ACTIVE {
     box-shadow: 1px 3px 2px #999;
     transform: translateY(2px);
@@ -406,7 +425,7 @@ button.small {
 #bankPanel .subtitle {
     font-size: 16px;
 }
-    
+
 #bankPanel .submitButton:ACTIVE {
     box-shadow: 1px 3px 2px #999;
     transform: translateY(2px);
@@ -617,37 +636,51 @@ button.small {
     display: none;
     height: 100%;
     width: 100%;
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
     left: 0;
     top: 0;
-    background-color: black; /* Black fallback color */
-    background-color: rgba(0,0,0, 0.5); /* Black w/opacity */
-    overflow-x: hidden; /* Disable horizontal scroll */
+    background-color: black;
+    /* Black fallback color */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black w/opacity */
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
     overflow-y: hidden;
-    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
 }
 
 #alert #alertbg {
     height: 100%;
     width: 100%;
-    position: fixed; /* Stay in place */
+    position: fixed;
+    /* Stay in place */
     /* z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
-    background-color: black; /* Black fallback color */
-    background-color: rgba(0,0,0, 0.5); /* Black w/opacity */
-    overflow-x: hidden; /* Disable horizontal scroll */
+    background-color: black;
+    /* Black fallback color */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black w/opacity */
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
     overflow-y: hidden;
-    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
 }
 
 .alert {
     position: relative;
-    top: 25%; /* 25% from the top */
-    width: 35%; /* 100% width */
-    text-align: center; /* Centered text/links */
-    margin-right: auto; 
+    top: 25%;
+    /* 25% from the top */
+    width: 35%;
+    /* 100% width */
+    text-align: center;
+    /* Centered text/links */
+    margin-right: auto;
     margin-left: auto;
     overflow: auto;
     background-color: white;
@@ -681,6 +714,8 @@ button.small {
     padding: 10px 15px;
     margin-bottom: 30px;
     margin-top: 0px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 #alert input[type=submit] {
@@ -696,7 +731,7 @@ button.small {
     margin-bottom: 15px;
     margin-top: 15px;
 }
-    
+
 #alert input[type=submit]:ACTIVE {
     box-shadow: 1px 3px 2px #999;
     transform: translateY(2px);
@@ -752,39 +787,34 @@ button.small {
 .housing {
     display: none;
 }
-/* Broken Close Button 
-.closebtn {
-    /* position: absolute; 
-    text-decoration: none;
-    color: grey;
-    text-align: right;
-    margin: 0px;
-    padding: 0px;
-    top: 0;
+
+.memehousing {
+    background-color: lime;
 }
 
-a.closebtn {
-    padding-right: 20px;
-    margin: 0 auto;
-    top: 0px;
-    text-align: right;
-    float: right;
+#meme-house {
+    background-color: lime;
 }
 
-h1.closebtn {
-    padding: 0px;
-    margin: 0 auto;
-    top: 0px;
-    text-align: right;
-    float: right;
+#meme-house {
+    width: 45%;
+    text-align: center;
+    margin: auto;
+    background-color: lime;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    padding: 5px;
 }
-*/
+
+#meme-house img {
+    max-width: 40%;
+}
 
 /* End Test Features */
 
-/* Win Menu */
+/* Credits Pane */
 
-#win {
+#credits {
     display: none;
     background-color: black;
     z-index: 1;
@@ -796,9 +826,20 @@ h1.closebtn {
     left: 0;
     right: 0;
     color: white;
+    text-align: center;
+    overflow: auto;
 }
 
-/* End Win Menu */
+#credits p {
+    font-size: 20px;
+}
+
+#credits a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* End Credits Pane */
 
 @media only screen and (max-width: 725px) {
     button {
@@ -820,7 +861,7 @@ h1.closebtn {
         margin-top: 15px;
         font-size: 14px;
     }
-    
+
 
     #debt p {
         margin-top: 15px;
@@ -835,12 +876,15 @@ h1.closebtn {
     #footer #muteButton {
         font-size: 18px;
     }
+
     .alert {
         position: relative;
-        top: 25%; /* 25% from the top */
-        width: 40%; /* 100% width */
-        text-align: center; /* Centered text/links */
-        margin-right: auto; 
+        top: 25%;
+        /* 25% from the top */
+        width: 40%;
+        text-align: center;
+        /* Centered text/links */
+        margin-right: auto;
         margin-left: auto;
         overflow: auto;
         background-color: white;
@@ -861,7 +905,7 @@ h1.closebtn {
         margin-top: 15px;
         font-size: 12px;
     }
-    
+
 
     #debt p {
         margin-top: 15px;
@@ -876,12 +920,15 @@ h1.closebtn {
     #footer #muteButton {
         font-size: 18px;
     }
+
     .alert {
         position: relative;
-        top: 25%; /* 25% from the top */
-        width: 50%; /* 100% width */
-        text-align: center; /* Centered text/links */
-        margin-right: auto; 
+        top: 25%;
+        /* 25% from the top */
+        width: 50%;
+        text-align: center;
+        /* Centered text/links */
+        margin-right: auto;
         margin-left: auto;
         overflow: auto;
         background-color: white;
@@ -902,7 +949,7 @@ h1.closebtn {
         margin-top: 15px;
         font-size: 9px;
     }
-    
+
 
     #debt p {
         margin-top: 15px;
@@ -917,12 +964,15 @@ h1.closebtn {
     #footer #muteButton {
         font-size: 14px;
     }
+
     .alert {
         position: relative;
-        top: 25%; /* 25% from the top */
-        width: 60%; /* 100% width */
-        text-align: center; /* Centered text/links */
-        margin-right: auto; 
+        top: 25%;
+        /* 25% from the top */
+        width: 60%;
+        text-align: center;
+        /* Centered text/links */
+        margin-right: auto;
         margin-left: auto;
         overflow: auto;
         background-color: white;
@@ -956,12 +1006,13 @@ h1.closebtn {
         font-size: 14px;
         padding: 10px 15px;
     }
+
     .alert {
         position: relative;
-        top: 10%; /* 25% from the top */
-        width: 30%; /* 100% width */
-        text-align: center; /* Centered text/links */
-        margin-right: auto; 
+        top: 10%;
+        text-align: center;
+        /* Centered text/links */
+        margin-right: auto;
         margin-left: auto;
         overflow: auto;
         background-color: white;
@@ -995,12 +1046,13 @@ h1.closebtn {
         font-size: 12px;
         padding: 5px 10px;
     }
+
     .alert {
         position: relative;
-        top: 10%; /* 25% from the top */
-        width: 30%; /* 100% width */
-        text-align: center; /* Centered text/links */
-        margin-right: auto; 
+        top: 10%;
+        text-align: center;
+        /* Centered text/links */
+        margin-right: auto;
         margin-left: auto;
         overflow: auto;
         background-color: white;

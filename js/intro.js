@@ -6,7 +6,7 @@ $(document).ready (
 
 $(document).ready (
     function () {
-        var devMode = true;
+        var devMode = false;
         if (devMode) {
             $("#intro").fadeOut(3000);
             $("#storyBG").fadeOut(3000);

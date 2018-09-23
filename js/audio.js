@@ -1,4 +1,4 @@
-$(document).ready (
+$(document).ready(
     function () {
         console.log("audio.js loaded.");
     }
@@ -7,7 +7,8 @@ $(document).ready (
 volume = 0.5;
 
 function play(item) {
-    var itemSound = document.getElementById(item+"-sound");
+    var itemSound = document.getElementById(item + "-sound");
+    itemSound.pause();
     itemSound.play();
     itemSound.volume = volume;
     item.currentTime = 0;
@@ -28,7 +29,7 @@ function playSell() {
 }
 
 function stopMusic(audio) {
-    var sound = document.getElementById(audio+"-sound");
+    var sound = document.getElementById(audio + "-sound");
     sound.volume = volume;
     sound.pause();
     sound.currentTime = 0;
