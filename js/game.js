@@ -77,7 +77,7 @@ function sell(item) {
         itemCount.innerHTML = parseInt(itemCount.innerHTML) - 1;
         happyz.innerHTML = parseInt(happyz.innerHTML) + parseInt(itemHappyz.innerHTML);
         gold.innerHTML = parseInt(gold.innerHTML) + parseInt(itemPrice.innerHTML);
-        storage.innerHTML = parseInt(storage.innerHTML) - 1;
+        storage.innerHTML = parseInt(storage.innerHTML) + 1;
         changeAllPrices();
         playSell();
     } else {
